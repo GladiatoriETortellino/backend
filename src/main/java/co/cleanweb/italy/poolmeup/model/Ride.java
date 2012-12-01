@@ -32,19 +32,34 @@ public class Ride extends AbstractObjectPersist {
 	public List<TripForARide> getCompatibleTrips(){
 		
 		List<TripForARide> compatibleTrips = new ArrayList<TripForARide>();
-		
 		Iterator<User> it = this.friends.iterator();
 		while (it.hasNext()){ 
 			User currentFriend = it.next(); //for each pollable friend
 			Trip currentTrip = currentFriend.getTrip(); //get his trip
-			if (currentTrip != null){
-				Double delay = currentTrip.getDelay(this.origin_destination); //if any, get delay (inf = out of delay)
+			if (currentTrip != null){ //TODO: and vehicleType is compatible with asker's preferences
+				Double delay = currentTrip.getDelay(this); //if any, get delay (inf = out of delay)
 				if (delay < inf){
 					compatibleTrips.add(new TripForARide(currentFriend.getUserName(), currentFriend.getPhoneNumber(), currentTrip.getVehicleType())); //if compatible, add to the list
 				}
 			}
 		}
 		return compatibleTrips;
+	}
+
+	public Integer getNumberOfPerson() {
+		return numberOfPerson;
+	}
+
+	public void setNumberOfPerson(Integer numberOfPerson) {
+		this.numberOfPerson = numberOfPerson;
+	}
+
+	public StepRequest getOrigin_destination() {
+		return origin_destination;
+	}
+
+	public void setOrigin_destination(StepRequest origin_destination) {
+		this.origin_destination = origin_destination;
 	}
 
 }
