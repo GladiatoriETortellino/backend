@@ -36,6 +36,9 @@ public class PersistenceManagerObjectify<T extends ObjectPersistable> implements
 		this.typeParameterClass = typeParameterClass;
 		ObjectifyService.register(AbstractObjectPersist.class);
 		ObjectifyService.register(Offer.class);
+		ObjectifyService.register(Ride.class);
+		ObjectifyService.register(Trip.class);
+		ObjectifyService.register(User.class);
 		localDao = new DAOBase();
 	}
 	
