@@ -18,7 +18,7 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
  * @author micheleorsi
  *
  */
-public class Offer{
+public class Offer extends AbstractObjectPersist {
 	
 	public static final String defaultVehicle=Vehicle_Type.AUTO.toString();
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyymmdd HH:mm:ss");

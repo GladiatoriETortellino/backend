@@ -3,6 +3,8 @@
  */
 package co.cleanweb.italy.poolmeup.rest;
 
+import java.util.Collections;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,6 +28,11 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 @Produces({ MediaType.APPLICATION_JSON+"; charset=utf-8" })
 @Consumes({ MediaType.APPLICATION_JSON+"; charset=utf-8" })
 public class OfferResource {
+	PersistenceManager<Offer> managerOffer = null;
+	
+	public OfferResource() {
+		managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
+	}
 	/**
 	 * 
 	 * @return
@@ -43,7 +50,7 @@ public class OfferResource {
 	@POST
 	public Response createNewOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
-		// persistiamo persistedOffer ..
+		managerOffer.save(Collections.singleton(persistedOffer));
 		OfferResponse offerResponse = new OfferResponse(persistedOffer);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
 	}
@@ -56,7 +63,7 @@ public class OfferResource {
 	@Path("/{offerId}")
 	public Response updateOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
-		// aggiorniamo persistedOffer ..
+		managerOffer.update(Collections.singleton(persistedOffer));
 		OfferResponse offerResponse = new OfferResponse(persistedOffer);
 		return Response.status(Response.Status.OK).entity(offerResponse).build();
 	}

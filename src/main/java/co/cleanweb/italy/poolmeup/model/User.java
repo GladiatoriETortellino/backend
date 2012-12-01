@@ -7,7 +7,7 @@ package co.cleanweb.italy.poolmeup.model;
  * @author micheleorsi
  *
  */
-public class User {
+public class User extends AbstractObjectPersist {
 	
 	private String phoneNumber = null;
 	private String userName = null;
