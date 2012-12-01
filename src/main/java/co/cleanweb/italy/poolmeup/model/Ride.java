@@ -20,7 +20,7 @@ public class Ride extends AbstractObjectPersist {
 	protected Calendar requestTime = null;  
 	protected Integer numberOfPerson = null; 
 	protected Step origin_destination = null;
-	@Transient protected List<User> friends = null;
+	protected List<User> friends = null;
 	
 	public Ride(RideRequest rr){
 		
