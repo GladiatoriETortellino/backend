@@ -28,7 +28,8 @@ public class PersistenceManagerObjectify<T extends ObjectPersistable> implements
 	
 	private static final Logger log = Logger.getLogger(PersistenceManagerObjectify.class
 			.getName());
-	protected DAOBase localDao = null;
+	
+	public DAOBase localDao = null;
 	
 	protected final Class<T> typeParameterClass;
 	
