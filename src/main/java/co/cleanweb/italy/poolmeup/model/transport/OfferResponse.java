@@ -1,5 +1,8 @@
 package co.cleanweb.italy.poolmeup.model.transport;
 
+/**
+ * @author Simone De Cristofaro
+ */
 public class OfferResponse {
 
 	//ATTRIBUTES
