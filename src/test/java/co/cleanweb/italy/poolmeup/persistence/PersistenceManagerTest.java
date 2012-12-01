@@ -99,7 +99,7 @@ public class PersistenceManagerTest {
 		assertNotNull(testOffer.getCreationDate());
 		assertNotNull(testOffer.getUpdatedDate());
 		assertEquals(testOffer.getCreationDate(), testOffer.getUpdatedDate());
-		assertNull(testOffer.getNumberPlaces());
+		assertEquals(0,testOffer.getNumberPlaces().intValue());
 		
 		Date firstDate = testOffer.getUpdatedDate();
 		testOffer.setNumberPlaces(Integer.valueOf(2));

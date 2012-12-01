@@ -38,7 +38,6 @@ public class Offer extends AbstractObjectPersist {
 	
 	private List<StepRequest> pathRequest = null;
 
-
 	//CONSTRUCTORS
 	public Offer() {}
 	
@@ -67,41 +66,61 @@ public class Offer extends AbstractObjectPersist {
 		this.pathRequest = offerRequest.getPathRequest();
 	}
 	//METHODS
+
+	/**
+	 * @return the phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * @return the vehicleType
+	 */
+	public Vehicle_Type getVehicleType() {
+		return vehicleType;
+	}
+
+	/**
+	 * @param vehicleType the vehicleType to set
+	 */
+	public void setVehicleType(Vehicle_Type vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
 	/**
 	 * @return the numberPlaces
 	 */
 	public Integer getNumberPlaces() {
 		return numberPlaces;
 	}
+
 	/**
 	 * @param numberPlaces the numberPlaces to set
 	 */
 	public void setNumberPlaces(Integer numberPlaces) {
 		this.numberPlaces = numberPlaces;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public Vehicle_Type getVehicleType() {
-		return vehicleType;
-	}
-
-	public void setVehicleType(Vehicle_Type vehicleType) {
-		this.vehicleType = vehicleType;
 	}
 
 	public Date getRequestTime() {
@@ -146,6 +165,5 @@ public class Offer extends AbstractObjectPersist {
 				+ maxThreshold + ", pathRequest=" + pathRequest + "]";
 	}
 	
-	
-	
+
 }

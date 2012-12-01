@@ -3,6 +3,8 @@
  */
 package co.cleanweb.italy.poolmeup.model;
 
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.annotation.Subclass;
 
 /**
@@ -14,6 +16,9 @@ public class User extends AbstractObjectPersist {
 	
 	private String phoneNumber = null;
 	private String userName = null;
+	
+	@Parent Key<Ride> ride;
+
 	
 	public User(String phoneNumber, String userName) {
 		this.phoneNumber = phoneNumber;
@@ -43,7 +48,7 @@ public class User extends AbstractObjectPersist {
 	public Trip getTrip(){
 		
 		Trip tripOfUser = null;
-		//TODO: insert query to the db
+		//TODO: query read from db
 		return tripOfUser;
 		
 	}
