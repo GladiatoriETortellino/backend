@@ -15,7 +15,7 @@ import com.googlecode.objectify.annotation.Subclass;
 
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
-import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
+import co.cleanweb.italy.poolmeup.model.transport.Step;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
 
@@ -36,14 +36,14 @@ public class Offer extends AbstractObjectPersist {
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
-	private List<StepRequest> pathRequest = null;
+	private List<Step> pathRequest = null;
 
 	//CONSTRUCTORS
 	public Offer() {}
 	
 	public Offer(String phoneNumber, String userName, Vehicle_Type vehicleType,
 			Integer numberPlaces, Date requestTime, Boolean isStartingTime,
-			Integer maxThreshold, List<StepRequest> pathRequest) {
+			Integer maxThreshold, List<Step> pathRequest) {
 		super();
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
@@ -147,11 +147,11 @@ public class Offer extends AbstractObjectPersist {
 		this.maxThreshold = maxThreshold;
 	}
 
-	public List<StepRequest> getPathRequest() {
+	public List<Step> getPathRequest() {
 		return pathRequest;
 	}
 
-	public void setPathRequest(List<StepRequest> pathRequest) {
+	public void setPathRequest(List<Step> pathRequest) {
 		this.pathRequest = pathRequest;
 	}
 

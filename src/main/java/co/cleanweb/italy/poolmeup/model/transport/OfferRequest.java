@@ -22,7 +22,7 @@ public class OfferRequest {
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
-	private List<StepRequest> pathRequest = null;
+	private List<Step> pathRequest = null;
 	
 	public OfferRequest() {}
 	/**
@@ -38,7 +38,7 @@ public class OfferRequest {
 	public OfferRequest(String phoneNumber, String userName,
 			Vehicle_Type vehicleType, Integer numberPlaces, Date requestTime,
 			Boolean isStartingTime, Integer maxThreshold,
-			List<StepRequest> pathRequest) {
+			List<Step> pathRequest) {
 		super();
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
@@ -151,14 +151,14 @@ public class OfferRequest {
 	/**
 	 * @return the pathRequest
 	 */
-	public List<StepRequest> getPathRequest() {
+	public List<Step> getPathRequest() {
 		return pathRequest;
 	}
 
 	/**
 	 * @param pathRequest the pathRequest to set
 	 */
-	public void setPathRequest(List<StepRequest> pathRequest) {
+	public void setPathRequest(List<Step> pathRequest) {
 		this.pathRequest = pathRequest;
 	}
 }
