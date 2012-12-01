@@ -21,7 +21,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  * @author Simone De Cristofaro
  * @created 20/ott/2012
  */
-public class Request {
+public class RoutingRequest {
 	
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
@@ -37,7 +37,7 @@ public class Request {
 	 * @param mode
 	 * @param process
 	 */
-	public Request(int mode,Calendar tdat,List<StepRequest> steps) {
+	public RoutingRequest(int mode,Calendar tdat,List<StepRequest> steps) {
 		super();
 		this.mode=mode;
 		if(tdat==null) {
