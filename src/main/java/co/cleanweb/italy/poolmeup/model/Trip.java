@@ -15,13 +15,18 @@ import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
  *
  */
 @Subclass
-public class Trip  extends AbstractObjectPersist {
+public class Trip extends AbstractObjectPersist {
 	
 	protected String driverName;
 	protected String driverPhoneNumber;
 	protected Vehicle_Type vehicleType;
 	protected Integer numberOfPlaces;
+	protected List<StepRequest> stepList;
 	
+	public Trip(List<StepRequest> stepList) {
+		this.stepList = stepList;
+	}
+
 	public String getDriverName() {
 		return driverName;
 	}
@@ -55,7 +60,21 @@ public class Trip  extends AbstractObjectPersist {
 	}
 
 	public Double getDelay(Ride ride){
-		List<StepRequest> tripSteps = this.getSteps();
+		/*
+		List<StepRequest> tripStepsList = this.getSteps();
+		StepRequest[] tripSteps = new StepRequest[tripStepsList.size()];
+		tripStepsList.toArray(tripSteps);
+		
+		for (int i = 0; i < tripSteps.length; i++){
+			for (int j = i; j < tripSteps.length; j++){
+				List<StepRequest> tentativeSteps = new ArrayList<StepRequest>();
+				for (int k = 0; k < tripSteps.length; k++){
+					
+				}
+				Trip tentativeTrip = new Trip();
+			}
+		}
+		
 		int freePlaces = this.numberOfPlaces;
 		Iterator<StepRequest> it = tripSteps.iterator();
 		while (it.hasNext()){
@@ -69,7 +88,10 @@ public class Trip  extends AbstractObjectPersist {
 			if (freePlaces >= ride.numberOfPerson){
 				currentStep.getDelay(ride.origin_destination);
 			}
-		}		
+		}
+		
+		*/
+		
 		return null; //TODO: insert delay calculation
 	}
 	
@@ -78,5 +100,4 @@ public class Trip  extends AbstractObjectPersist {
 		return null;
 	}
 
-	public Trip() {}
 }
