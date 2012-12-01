@@ -59,7 +59,8 @@ public class OfferResource {
 	@POST
 	public Response createNewOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
-		managerOffer.save(Collections.singleton(persistedOffer));
+		//SIMONE - ripristinare
+		//managerOffer.save(Collections.singleton(persistedOffer));
 		OfferResponse offerResponse = new OfferResponse(offerRequested);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
 	}
