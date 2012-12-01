@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queue-entries>
+  <queue>	<!-- for generic, not prior tasks, as blob deletion -->	
+    <name>generic-queue</name>
+    <rate>10/s</rate>
+	<retry-parameters>
+      <min-backoff-seconds>10</min-backoff-seconds>
+      <max-backoff-seconds>600</max-backoff-seconds>
+      <max-doublings>4</max-doublings>
+    </retry-parameters>
+  </queue>
+</queue-entries>

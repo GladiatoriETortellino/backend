@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<!-- START Default page -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<!-- END Default page -->
+	
+	<!-- START RESTful servlet -->
+	<servlet>
+		<servlet-name>jersey</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>co.cleanweb.italy.poolmeup.rest;org.codehaus.jackson.jaxrs</param-value>
+		</init-param>
+		<!-- in order to remove prefix in lists -->
+		<init-param>
+			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+    		<param-name>com.sun.jersey.config.feature.DisableWADL</param-name>
+     		<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.MediaTypeMappings</param-name>
+			<param-value>json : application/json, xml : application/xml</param-value>
+		</init-param>
+<!-- 		<init-param> -->
+<!--         	<param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name> -->
+<!--         	<param-value>/jqm</param-value> -->
+<!--     	</init-param> -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- Mapping for session -->
+	<servlet-mapping>
+		<servlet-name>jersey</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	<!-- END RESTful servlet for GWT -->
+</web-app>
