@@ -3,6 +3,7 @@
  */
 package co.cleanweb.italy.poolmeup.model.transport;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,15 +16,39 @@ public class OfferRequest {
 	private String phoneNumber = null;
 	private String userName = null;
 	
-	private String vehicleType = null;
-	private int numberPlaces = 0;
-	private Date requestTime = null;
-	private boolean isStartingTime;
-	private int maxThreshold;
+	private Vehicle_Type vehicleType = null;
+	private Integer numberPlaces = 0;
+	private Calendar requestTime = null;
+	private Boolean isStartingTime;
+	private Integer maxThreshold;
 	
 	private List<StepRequest> pathRequest = null;
 	
 	public OfferRequest() {}
+	/**
+	 * @param phoneNumber
+	 * @param userName
+	 * @param vehicleType
+	 * @param numberPlaces
+	 * @param requestTime
+	 * @param isStartingTime
+	 * @param maxThreshold
+	 * @param pathRequest
+	 */
+	public OfferRequest(String phoneNumber, String userName,
+			Vehicle_Type vehicleType, Integer numberPlaces, Calendar requestTime,
+			Boolean isStartingTime, Integer maxThreshold,
+			List<StepRequest> pathRequest) {
+		super();
+		this.phoneNumber = phoneNumber;
+		this.userName = userName;
+		this.vehicleType = vehicleType;
+		this.numberPlaces = numberPlaces;
+		this.requestTime = requestTime;
+		this.isStartingTime = isStartingTime;
+		this.maxThreshold = maxThreshold;
+		this.pathRequest = pathRequest;
+	}
 
 	/**
 	 * @return the phoneNumber
@@ -56,70 +81,70 @@ public class OfferRequest {
 	/**
 	 * @return the vehicleType
 	 */
-	public String getVehicleType() {
+	public Vehicle_Type getVehicleType() {
 		return vehicleType;
 	}
 
 	/**
 	 * @param vehicleType the vehicleType to set
 	 */
-	public void setVehicleType(String vehicleType) {
+	public void setVehicleType(Vehicle_Type vehicleType) {
 		this.vehicleType = vehicleType;
 	}
 
 	/**
 	 * @return the numberPlaces
 	 */
-	public int getNumberPlaces() {
+	public Integer getNumberPlaces() {
 		return numberPlaces;
 	}
 
 	/**
 	 * @param numberPlaces the numberPlaces to set
 	 */
-	public void setNumberPlaces(int numberPlaces) {
+	public void setNumberPlaces(Integer numberPlaces) {
 		this.numberPlaces = numberPlaces;
 	}
 
 	/**
 	 * @return the requestTime
 	 */
-	public Date getRequestTime() {
+	public Calendar getRequestTime() {
 		return requestTime;
 	}
 
 	/**
 	 * @param requestTime the requestTime to set
 	 */
-	public void setRequestTime(Date requestTime) {
+	public void setRequestTime(Calendar requestTime) {
 		this.requestTime = requestTime;
 	}
 
 	/**
 	 * @return the isStartingTime
 	 */
-	public boolean isStartingTime() {
+	public Boolean isStartingTime() {
 		return isStartingTime;
 	}
 
 	/**
 	 * @param isStartingTime the isStartingTime to set
 	 */
-	public void setStartingTime(boolean isStartingTime) {
+	public void setStartingTime(Boolean isStartingTime) {
 		this.isStartingTime = isStartingTime;
 	}
 
 	/**
 	 * @return the maxThreshold
 	 */
-	public int getMaxThreshold() {
+	public Integer getMaxThreshold() {
 		return maxThreshold;
 	}
 
 	/**
 	 * @param maxThreshold the maxThreshold to set
 	 */
-	public void setMaxThreshold(int maxThreshold) {
+	public void setMaxThreshold(Integer maxThreshold) {
 		this.maxThreshold = maxThreshold;
 	}
 
@@ -135,13 +160,5 @@ public class OfferRequest {
 	 */
 	public void setPathRequest(List<StepRequest> pathRequest) {
 		this.pathRequest = pathRequest;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "{\"returnMessage\":\"this is a good offer request\"}";
 	}
 }

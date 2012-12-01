@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 import co.cleanweb.italy.poolmeup.model.Offer;
+import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.Trip;
 import co.cleanweb.italy.poolmeup.model.User;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
@@ -65,5 +66,11 @@ class DAO extends DAOBase {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Trip.class);
 		ObjectifyService.register(Offer.class);
+		ObjectifyService.register(Ride.class);
     }
+	
+	public DAO() {
+		super();
+		ObjectifyService.begin();
+	}
 }

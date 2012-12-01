@@ -6,7 +6,7 @@ import java.util.List;
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
 import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 
-public class Ride{
+public class Ride extends AbstractObjectPersist {
 	
 	protected Long userID = null;
 	protected String userName = null;
