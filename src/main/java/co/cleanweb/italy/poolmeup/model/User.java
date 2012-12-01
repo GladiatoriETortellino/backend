@@ -20,4 +20,28 @@ public class User extends AbstractObjectPersist {
 	public User() {
 		
 	}
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Trip getTrip(){
+		
+		Trip tripOfUser = null;
+		//TODO: insert query to the db
+		return tripOfUser;
+		
+	}
 }
