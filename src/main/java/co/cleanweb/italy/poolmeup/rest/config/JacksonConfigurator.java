@@ -27,8 +27,6 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
 	.getLogger(JacksonConfigurator.class.getName());
     private static ObjectMapper mapper = null;
     
-//    private final Class<?>[] classTypes = new Class[] { Category.class, UserAccount.class, Content.class, Album.class, Media.class, App.class, String.class, Text.class};
-
     /**
      * <p>Constructor for JacksonConfigurator.</p>
      */

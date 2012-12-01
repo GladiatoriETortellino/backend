@@ -201,6 +201,18 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<!-- Objectify lib -->
+		<dependency>
+			<groupId>com.googlecode.objectify</groupId>
+			<artifactId>objectify</artifactId>
+			<version>${objectify.version}</version>
+		</dependency>
+		<!-- Persistence library to use objectify annotations -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 	<url>http://poolmeup.appspot.com</url>
@@ -318,6 +330,7 @@
 		<datanucleus.plugin.version>1.1.4</datanucleus.plugin.version>
 		<datanucleus.gae.version>1.0.10</datanucleus.gae.version>
 		<gae.plugin.version>0.9.4</gae.plugin.version>
+		<objectify.version>3.1</objectify.version>
 	</properties>
 
 	<repositories>
