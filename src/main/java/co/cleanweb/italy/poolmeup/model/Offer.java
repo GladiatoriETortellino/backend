@@ -15,7 +15,6 @@ import com.googlecode.objectify.annotation.Subclass;
 
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
-import co.cleanweb.italy.poolmeup.model.transport.Step;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
 

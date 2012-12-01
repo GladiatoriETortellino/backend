@@ -1,6 +1,6 @@
-package co.cleanweb.italy.poolmeup.model.transport;
+package co.cleanweb.italy.poolmeup.model;
 
-public class Step {
+public class Step extends AbstractObjectPersist{
 	private Double latitude = null;
 	private Double longitude = null;
 	private boolean isFromPickToDrop = true;

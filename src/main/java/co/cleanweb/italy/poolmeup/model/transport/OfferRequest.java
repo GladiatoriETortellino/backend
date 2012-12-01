@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import co.cleanweb.italy.poolmeup.model.Step;
+
 /**
  * @author micheleorsi
  *

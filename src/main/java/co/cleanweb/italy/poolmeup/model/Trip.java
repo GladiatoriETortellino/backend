@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import com.googlecode.objectify.annotation.Subclass;
-import co.cleanweb.italy.poolmeup.model.transport.Step;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 
 /**

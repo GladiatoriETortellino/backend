@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import co.cleanweb.italy.poolmeup.model.Ride;
+import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.TripForARide;
 import co.cleanweb.italy.poolmeup.model.User;
 

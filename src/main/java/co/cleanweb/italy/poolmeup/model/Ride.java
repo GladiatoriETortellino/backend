@@ -10,7 +10,6 @@ import javax.persistence.Transient;
 import com.googlecode.objectify.annotation.Subclass;
 
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
-import co.cleanweb.italy.poolmeup.model.transport.Step;
 
 @Subclass
 public class Ride extends AbstractObjectPersist {
