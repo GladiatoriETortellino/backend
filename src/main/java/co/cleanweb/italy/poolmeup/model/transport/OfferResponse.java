@@ -2,6 +2,11 @@ package co.cleanweb.italy.poolmeup.model.transport;
 
 import co.cleanweb.italy.poolmeup.model.Offer;
 
+
+/**
+ * @author Simone De Cristofaro
+ */
+
 public class OfferResponse {
 
 	//ATTRIBUTES
