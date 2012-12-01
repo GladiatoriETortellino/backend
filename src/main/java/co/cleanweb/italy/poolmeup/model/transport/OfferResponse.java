@@ -41,6 +41,4 @@ public class OfferResponse {
 	public String getPathLink() {
 		return pathLink;
 	}
-
-	
 }
