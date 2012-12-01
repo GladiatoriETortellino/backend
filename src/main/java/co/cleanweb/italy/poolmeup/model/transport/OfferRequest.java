@@ -16,10 +16,10 @@ public class OfferRequest {
 	private String userName = null;
 	
 	private String vehicleType = null;
-	private int numberPlaces = 0;
+	private Integer numberPlaces = 0;
 	private Date requestTime = null;
-	private boolean isStartingTime;
-	private int maxThreshold;
+	private Boolean isStartingTime;
+	private Integer maxThreshold;
 	
 	private List<StepRequest> pathRequest = null;
 	
@@ -70,14 +70,14 @@ public class OfferRequest {
 	/**
 	 * @return the numberPlaces
 	 */
-	public int getNumberPlaces() {
+	public Integer getNumberPlaces() {
 		return numberPlaces;
 	}
 
 	/**
 	 * @param numberPlaces the numberPlaces to set
 	 */
-	public void setNumberPlaces(int numberPlaces) {
+	public void setNumberPlaces(Integer numberPlaces) {
 		this.numberPlaces = numberPlaces;
 	}
 
@@ -98,28 +98,28 @@ public class OfferRequest {
 	/**
 	 * @return the isStartingTime
 	 */
-	public boolean isStartingTime() {
+	public Boolean isStartingTime() {
 		return isStartingTime;
 	}
 
 	/**
 	 * @param isStartingTime the isStartingTime to set
 	 */
-	public void setStartingTime(boolean isStartingTime) {
+	public void setStartingTime(Boolean isStartingTime) {
 		this.isStartingTime = isStartingTime;
 	}
 
 	/**
 	 * @return the maxThreshold
 	 */
-	public int getMaxThreshold() {
+	public Integer getMaxThreshold() {
 		return maxThreshold;
 	}
 
 	/**
 	 * @param maxThreshold the maxThreshold to set
 	 */
-	public void setMaxThreshold(int maxThreshold) {
+	public void setMaxThreshold(Integer maxThreshold) {
 		this.maxThreshold = maxThreshold;
 	}
 
