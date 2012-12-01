@@ -14,7 +14,6 @@ import co.cleanweb.italy.poolmeup.model.Offer;
 
 public class OfferResponse {
 
-	private static final String routingServiceUrl="http://hackathon.opendata.sistemaits.com/dsps/?"; 
 	private static final String defaultVehicle=Vehicle_Type.AUTO.toString();
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyymmdd HH:mm:ss");
 	
@@ -41,7 +40,7 @@ public class OfferResponse {
 	public OfferResponse(OfferRequest request) {
 
 		RoutingRequest routingRequest=new RoutingRequest(request.getVehicleType(), request.getRequestTime(), request.getPathRequest());
-		pathLink=routingServiceUrl+routingRequest.toString();
+		pathLink=routingRequest.toString();
 	}
 
 	//GETTERS
