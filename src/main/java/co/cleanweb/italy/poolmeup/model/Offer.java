@@ -34,6 +34,15 @@ public class Offer extends AbstractObjectPersist {
 		return null;
 	}
 
+	/**
+	 * @return the numberPlaces
+	 */
+	public Integer getNumberPlaces() {
+		return numberPlaces;
+	}
+	
+	
+
 	
 	
 }
