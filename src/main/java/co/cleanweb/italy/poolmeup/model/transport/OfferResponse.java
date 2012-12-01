@@ -34,8 +34,7 @@ public class OfferResponse {
 	}
 
 	
-	public OfferResponse(Offer persistedOffer,OfferRequest request) {
-		request=persistedOffer.getRequest();
+	public OfferResponse(OfferRequest request) {
 		RoutingRequest routingRequest=new RoutingRequest(request.getVehicleType(), request.getRequestTime(), request.getPathRequest());
 		pathLink=routingServiceUrl+routingRequest.toString();
 	}
