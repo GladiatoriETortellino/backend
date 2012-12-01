@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
+import co.cleanweb.italy.poolmeup.model.AbstractObjectPersist;
 import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.Trip;
@@ -27,13 +28,18 @@ public class PersistenceManagerObjectify<T extends ObjectPersistable> implements
 	
 	private static final Logger log = Logger.getLogger(PersistenceManagerObjectify.class
 			.getName());
-	protected DAO localDao = null;
+	protected DAOBase localDao = null;
 	
 	protected final Class<T> typeParameterClass;
 	
 	public PersistenceManagerObjectify(Class<T> typeParameterClass) {
 		this.typeParameterClass = typeParameterClass;
-		localDao = new DAO();
+		ObjectifyService.register(AbstractObjectPersist.class);
+		ObjectifyService.register(Offer.class);
+		ObjectifyService.register(Ride.class);
+		ObjectifyService.register(Trip.class);
+		ObjectifyService.register(User.class);
+		localDao = new DAOBase();
 	}
 	
 	@Override
@@ -58,19 +64,5 @@ public class PersistenceManagerObjectify<T extends ObjectPersistable> implements
 	@Override
 	public Collection<T> update(Iterable<T> objects) {
 		return this.save(objects);
-	}
-}
-
-class DAO extends DAOBase {
-	static {
-		ObjectifyService.register(User.class);
-		ObjectifyService.register(Trip.class);
-		ObjectifyService.register(Offer.class);
-		ObjectifyService.register(Ride.class);
-    }
-	
-	public DAO() {
-		super();
-		ObjectifyService.begin();
 	}
 }

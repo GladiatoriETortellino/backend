@@ -1,3 +1,4 @@
+
 package co.cleanweb.italy.poolmeup.model;
 
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
@@ -22,5 +23,7 @@ public class TripForARide {
 		this.vehicleType = trip.getVehicleType();
 		
 	}
+	
+	public TripForARide() {}
 	
 }

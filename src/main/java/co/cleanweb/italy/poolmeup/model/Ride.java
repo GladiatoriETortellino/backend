@@ -5,9 +5,12 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
+import com.googlecode.objectify.annotation.Subclass;
+
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
 import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 
+@Subclass
 public class Ride extends AbstractObjectPersist {
 	
 	private static final Double inf = (double) 99999;
@@ -29,6 +32,8 @@ public class Ride extends AbstractObjectPersist {
 		
 	}
 	
+	public Ride() {}
+
 	public List<TripForARide> getCompatibleTrips(){
 		
 		List<TripForARide> compatibleTrips = new ArrayList<TripForARide>();

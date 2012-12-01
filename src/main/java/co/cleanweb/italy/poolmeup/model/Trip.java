@@ -6,7 +6,7 @@ package co.cleanweb.italy.poolmeup.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import com.googlecode.objectify.annotation.Subclass;
 import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 
@@ -14,6 +14,7 @@ import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
  * @author micheleorsi
  *
  */
+@Subclass
 public class Trip  extends AbstractObjectPersist {
 	
 	protected String driverName;
@@ -77,4 +78,5 @@ public class Trip  extends AbstractObjectPersist {
 		return null;
 	}
 
+	public Trip() {}
 }
