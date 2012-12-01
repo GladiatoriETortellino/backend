@@ -43,7 +43,7 @@ public class OfferResource {
 	@POST
 	public Response createNewOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
-		// persistiamo persistedOffer
+		// persistiamo persistedOffer ..
 		OfferResponse offerResponse = new OfferResponse(persistedOffer);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
 	}
@@ -54,8 +54,11 @@ public class OfferResource {
 	 */
 	@POST
 	@Path("/{offerId}")
-	public Response updateOffer(OfferRequest offerRequest) {
-		return Response.status(Response.Status.OK).entity("{\"response\":\"updateOffer method\"}").build();
+	public Response updateOffer(OfferRequest offerRequested) {
+		Offer persistedOffer = new Offer(offerRequested);
+		// aggiorniamo persistedOffer ..
+		OfferResponse offerResponse = new OfferResponse(persistedOffer);
+		return Response.status(Response.Status.OK).entity(offerResponse).build();
 	}
 	/**
 	 * 
@@ -64,6 +67,8 @@ public class OfferResource {
 	@POST
 	@Path("/{offerId}/join")
 	public Response joinOffer() {
-		return Response.status(Response.Status.OK).entity("{\"response\":\"joinOffer method\"}").build();
+		// cristallizzo richiesta
+		// faccio push notification al guidatore
+		return Response.status(Response.Status.OK).entity("{\"response\":\"request pushed\"}").build();
 	}
 }

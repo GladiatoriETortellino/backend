@@ -11,7 +11,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import co.cleanweb.italy.poolmeup.model.Offer;
+import co.cleanweb.italy.poolmeup.model.Ride;
+import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
+import co.cleanweb.italy.poolmeup.model.transport.RideResponse;
 
 /**
  * @author micheleorsi
@@ -34,7 +38,10 @@ public class RideResource {
 	 * @return
 	 */
 	@POST
-	public Response createNewRide(RideRequest rideRequest) {
-		return Response.status(Response.Status.CREATED).entity("{\"response\":\"createNewRide method\"}").build();
+	public Response createNewRide(RideRequest rideRequested) {
+		Ride persistedRide = new Ride(rideRequested);
+		// persistiamo persistedRide ..
+		RideResponse rideResponse = new RideResponse(persistedRide);
+		return Response.status(Response.Status.CREATED).entity(rideResponse).build();
 	}
 }
