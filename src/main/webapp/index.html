@@ -1,1 +1,41 @@
-test ciao
+<h1>Offer</h1>
+<h3>Offer ride</h3>
+<p>POST: http://poolmeup.appspot.com/rest/offers</p>
+<ul>
+<li>isStartingTime : boolean</li>
+<li>maxThreshold : int</li>
+<li>numberPlaces : int</li>
+<li>pathRequest : List of StepRequest</li>
+<li>phoneNumber : String</li>
+<li>requestTime : Date</li>
+<li>userName : String</li>
+<li>vehicleType : String</li>
+</ul>
+
+<h3>Update ride</h3>
+<p>POST: http://poolmeup.appspot.com/rest/offers/id-request</p>
+<ul>
+<li>isStartingTime : boolean</li>
+<li>maxThreshold : int</li>
+<li>numberPlaces : int</li>
+<li>pathRequest : List of StepRequest</li>
+<li>phoneNumber : String</li>
+<li>requestTime : Date</li>
+<li>userName : String</li>
+<li>vehicleType : String</li>
+</ul>
+
+<h3>Join ride</h3>
+<p>POST: http://poolmeup.appspot.com/rest/offers/id-request/join</p>
+<p>(empty body)</p>
+
+<h1>Ride</h1>
+<h3>Ride request</h3>
+<p>POST: http://poolmeup.appspot.com/rest/offers</p>
+<ul>
+<li>friends : List</li>
+<li>numberOfPerson : Long</li>
+<li>origin_destination : List of StepRequest </li>
+<li>userID : Long</li>
+<li>userName : String</li>
+</ul>
