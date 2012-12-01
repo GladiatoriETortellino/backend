@@ -14,7 +14,8 @@ import co.cleanweb.italy.poolmeup.model.Offer;
 
 public class OfferResponse {
 
-	public static final String defaultVehicle=Vehicle_Type.AUTO.toString();
+	private static final String routingServiceUrl="http://hackathon.opendata.sistemaits.com/dsps/?"; 
+	private static final String defaultVehicle=Vehicle_Type.AUTO.toString();
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyymmdd HH:mm:ss");
 	
 	//ATTRIBUTES
@@ -33,29 +34,10 @@ public class OfferResponse {
 	}
 
 	
-	public OfferResponse(Offer persistedOffer) {
-		OfferRequest request=persistedOffer.getRequest();
-		
-		StringBuilder sb=new StringBuilder("http://hackathon.opendata.sistemaits.com/dsps/?treq=findPath&tdes=0&");
-		List<StepRequest> pathRequest=request.getPathRequest();
-		Iterator<StepRequest> it=pathRequest.iterator();
-		StepRequest step=null;
-		int counter=0;
-		while(it.hasNext()){
-			counter++;
-			step=it.next();
-			sb.append("pxcoo").append(counter).append("=").append(step.getLongitude());
-			sb.append("&");
-			sb.append("pycoo").append(counter).append("=").append(step.getLongitude());
-			sb.append("&");
-		}
-		sb.append("mode=").append(defaultVehicle).append("&");
-		sb.append("tdes=").append(request.isStartingTime()?"0":"1");
-		sb.append("tdat=").append(sdf.format(request.getRequestTime()));
-		sb.append("&");
-
-
-		
+	public OfferResponse(Offer persistedOffer,OfferRequest request) {
+		request=persistedOffer.getRequest();
+		RoutingRequest routingRequest=new RoutingRequest(request.getVehicleType(), request.getRequestTime(), request.getPathRequest());
+		pathLink=routingServiceUrl+routingRequest.toString();
 	}
 
 	//METHODS

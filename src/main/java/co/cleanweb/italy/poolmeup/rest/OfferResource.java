@@ -51,7 +51,7 @@ public class OfferResource {
 	public Response createNewOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
 		managerOffer.save(Collections.singleton(persistedOffer));
-		OfferResponse offerResponse = new OfferResponse(persistedOffer);
+		OfferResponse offerResponse = new OfferResponse(persistedOffer,offerRequested);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
 	}
 	/**
@@ -64,7 +64,7 @@ public class OfferResource {
 	public Response updateOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
 		managerOffer.update(Collections.singleton(persistedOffer));
-		OfferResponse offerResponse = new OfferResponse(persistedOffer);
+		OfferResponse offerResponse = new OfferResponse(persistedOffer,offerRequested);
 		return Response.status(Response.Status.OK).entity(offerResponse).build();
 	}
 	/**
