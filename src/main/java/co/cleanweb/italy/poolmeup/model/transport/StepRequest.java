@@ -1,8 +1,8 @@
 package co.cleanweb.italy.poolmeup.model.transport;
 
 public class StepRequest {
-	private Long latitude = null;
-	private Long longitude = null;
+	private Double latitude = null;
+	private Double longitude = null;
 	
 	public StepRequest() {}
 	
@@ -10,7 +10,7 @@ public class StepRequest {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public StepRequest(Long latitude, Long longitude) {
+	public StepRequest(Double latitude, Double longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -19,28 +19,28 @@ public class StepRequest {
 	/**
 	 * @return the latitude
 	 */
-	public Long getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
 	/**
 	 * @param latitude the latitude to set
 	 */
-	public void setLatitude(Long latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
 	/**
 	 * @return the longitude
 	 */
-	public Long getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
 	/**
 	 * @param longitude the longitude to set
 	 */
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	/* (non-Javadoc)
