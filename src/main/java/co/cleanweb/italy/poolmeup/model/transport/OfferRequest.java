@@ -25,6 +25,30 @@ public class OfferRequest {
 	private List<StepRequest> pathRequest = null;
 	
 	public OfferRequest() {}
+	/**
+	 * @param phoneNumber
+	 * @param userName
+	 * @param vehicleType
+	 * @param numberPlaces
+	 * @param requestTime
+	 * @param isStartingTime
+	 * @param maxThreshold
+	 * @param pathRequest
+	 */
+	public OfferRequest(String phoneNumber, String userName,
+			Vehicle_Type vehicleType, Integer numberPlaces, Calendar requestTime,
+			Boolean isStartingTime, Integer maxThreshold,
+			List<StepRequest> pathRequest) {
+		super();
+		this.phoneNumber = phoneNumber;
+		this.userName = userName;
+		this.vehicleType = vehicleType;
+		this.numberPlaces = numberPlaces;
+		this.requestTime = requestTime;
+		this.isStartingTime = isStartingTime;
+		this.maxThreshold = maxThreshold;
+		this.pathRequest = pathRequest;
+	}
 
 	/**
 	 * @return the phoneNumber
@@ -136,13 +160,5 @@ public class OfferRequest {
 	 */
 	public void setPathRequest(List<StepRequest> pathRequest) {
 		this.pathRequest = pathRequest;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "{\"returnMessage\":\"this is a good offer request\"}";
 	}
 }

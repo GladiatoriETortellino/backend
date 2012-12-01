@@ -5,10 +5,18 @@ package co.cleanweb.italy.poolmeup.persistence;
 
 import static org.junit.Assert.*;
 
+import java.util.Collections;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
+
+import co.cleanweb.italy.poolmeup.model.Offer;
+import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
+import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
 /**
@@ -16,8 +24,6 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
  *
  */
 public class PersistenceManagerTest {
-	
-//	PersistenceManager<ObjectPersistable>
 
 	public PersistenceManagerTest() {
 	}
@@ -49,7 +55,15 @@ public class PersistenceManagerTest {
 	 */
 	@Test
 	public void testSave() {
-//		Offer
+		Offer testOffer = new Offer(new OfferRequest("13243124","username",null,Integer.valueOf(4),null,null,null,null));
+		
+		Objectify ofy = ObjectifyService.begin();
+		
+//		PersistenceManager<Offer> managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
+//		managerOffer.save(Collections.singleton(testOffer));
+		
+//		Offer readOffer = managerOffer.read(Collections.singleton(testOffer.getKey())).iterator().next();
+//		assertEquals(4, readOffer.getNumberPlaces().intValue());
 	}
 
 	/**
