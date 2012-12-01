@@ -13,7 +13,7 @@ public enum Vehicle_Type {
 	},
 	SCOOTER{
     	public String toString() {        
-    		return "scooter";
+    		return "motociclo_sup_150";
     	}
 	};
 
