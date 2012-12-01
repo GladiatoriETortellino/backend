@@ -4,7 +4,10 @@
 package co.cleanweb.italy.poolmeup.persistence;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +17,7 @@ import static org.junit.Assert.*;
 
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.User;
+import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
@@ -52,27 +56,28 @@ public class PersistenceTestRelation {
 
 	@Test
 	public void testRideUser() {
-		Objectify ofy = ObjectifyService.begin();
-		ObjectifyService.register(Ride.class);
-		ObjectifyService.register(User.class);
+		
+		PersistenceManagerObjectify<Ride> managerRide = new PersistenceManagerObjectify<Ride>(Ride.class);
+		PersistenceManagerObjectify<User> managerUser = new PersistenceManagerObjectify<User>(User.class);
 		
 		Ride ride = new Ride();
 		User newUser1 = new User("123456","userName");
 		User newUser2 = new User("123456","userName");
 		User newUser3 = new User("123456","userName");
-		List<User> listFriends = new ArrayList<User>();
+		ArrayList<User> listFriends = new ArrayList<User>();
 		listFriends.add(newUser1);
 		listFriends.add(newUser2);
 		listFriends.add(newUser3);
 		ride.setFriends(listFriends);
-		ofy.put(listFriends);
-		ofy.put(ride);
+		managerUser.save(listFriends);
+		managerRide.save(Collections.singleton(ride));
 		assertNotNull(ride.getKey());
 		for (User user : listFriends) {
 			assertNotNull(user);
 		}
-
-//		Iterable<Employee> subordinates = ofy.query(Employee.class).filter("manager", fred);
+		
+		Iterable<User> subordinates = managerUser.localDao.ofy().query(User.class).filter("ride", ride);
+		assertEquals(3, listFriends.size());
 	}
 
 }
