@@ -5,6 +5,8 @@ package co.cleanweb.italy.poolmeup.model;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
 
 /**
@@ -13,6 +15,7 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
  */
 public abstract class AbstractObjectPersist implements ObjectPersistable {
 
+	@Id 
 	private Long key = null;
 	private Date creationDate = null;
 	private Date updatedDate = null;
@@ -80,6 +83,13 @@ public abstract class AbstractObjectPersist implements ObjectPersistable {
 	public void validate() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(Long key) {
+		this.key = key;
 	}
 	
 }

@@ -20,20 +20,18 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
  */
 public class Offer extends AbstractObjectPersist {
 	
-	//ATTRIBUTES
-	private OfferRequest request;
+	private Integer numberPlaces = 0;
 	
 	//CONSTRUCTORS
 	public Offer() {}
 	
 	public Offer(OfferRequest offerRequest) {
-		this.request=offerRequest;
+		this.numberPlaces=offerRequest.getNumberPlaces();
 	}
-
 	
 	//METHODS
 	public OfferRequest getRequest() {
-		return request;
+		return null;
 	}
 
 	
