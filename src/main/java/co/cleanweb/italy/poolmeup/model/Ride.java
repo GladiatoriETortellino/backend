@@ -2,9 +2,12 @@ package co.cleanweb.italy.poolmeup.model;
 
 import java.util.List;
 
+import com.googlecode.objectify.annotation.Subclass;
+
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
 import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 
+@Subclass
 public class Ride extends AbstractObjectPersist {
 	
 	protected Long userID = null;
@@ -18,5 +21,7 @@ public class Ride extends AbstractObjectPersist {
 		//copia degli attributi da RideRequest a Ride
 		
 	}
+	
+	public Ride() {}
 
 }

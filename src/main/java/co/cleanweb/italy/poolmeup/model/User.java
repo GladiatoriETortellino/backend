@@ -3,10 +3,13 @@
  */
 package co.cleanweb.italy.poolmeup.model;
 
+import com.googlecode.objectify.annotation.Subclass;
+
 /**
  * @author micheleorsi
  *
  */
+@Subclass
 public class User extends AbstractObjectPersist {
 	
 	private String phoneNumber = null;
