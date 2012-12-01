@@ -26,7 +26,7 @@ public class Offer{
 	public Offer() {}
 	
 	public Offer(OfferRequest offerRequest) {
-		StringBuilder sb=new StringBuilder("http:");
+		StringBuilder sb=new StringBuilder("http://hackathon.opendata.sistemaits.com/dsps/?treq=findPath&tdes=0");
 		
 		
 		
