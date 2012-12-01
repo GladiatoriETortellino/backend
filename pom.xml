@@ -211,6 +211,38 @@
 	</scm>
 	<build>
 		<plugins>
+			<!-- The actual maven-gae-plugin. Type "mvn gae:run" to run project, "mvn 
+				gae:deploy" to upload to GAE. -->
+			<plugin>
+				<groupId>net.kindleit</groupId>
+				<artifactId>maven-gae-plugin</artifactId>
+				<version>${gae.plugin.version}</version>
+				<configuration>
+					<serverId>appengine</serverId>
+				</configuration>
+				<executions>
+					<!-- <execution> -->
+					<!-- <id>execution1</id> -->
+					<!-- <phase>deploy</phase> -->
+					<!-- <goals> -->
+					<!-- <goal>unpack</goal> -->
+					<!-- <goal>deploy</goal> -->
+					<!-- <goal>backends-update</goal> -->
+					<!-- <goal>update-indexes</goal> -->
+					<!-- </goals> -->
+					<!-- </execution> -->
+					<execution>
+						<id>execution2</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>unpack</goal>
+							<goal>deploy</goal>
+							<goal>backends-update</goal>
+							<goal>update-indexes</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
