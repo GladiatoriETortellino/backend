@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import co.cleanweb.italy.poolmeup.model.Step;
+
 /**
  * @author micheleorsi
  *
@@ -18,11 +20,11 @@ public class OfferRequest {
 	
 	private Vehicle_Type vehicleType = null;
 	private Integer numberPlaces = 0;
-	private Calendar requestTime = null;
+	private Date requestTime = null;
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
-	private List<StepRequest> pathRequest = null;
+	private List<Step> pathRequest = null;
 	
 	public OfferRequest() {}
 	/**
@@ -36,9 +38,9 @@ public class OfferRequest {
 	 * @param pathRequest
 	 */
 	public OfferRequest(String phoneNumber, String userName,
-			Vehicle_Type vehicleType, Integer numberPlaces, Calendar requestTime,
+			Vehicle_Type vehicleType, Integer numberPlaces, Date requestTime,
 			Boolean isStartingTime, Integer maxThreshold,
-			List<StepRequest> pathRequest) {
+			List<Step> pathRequest) {
 		super();
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
@@ -109,14 +111,14 @@ public class OfferRequest {
 	/**
 	 * @return the requestTime
 	 */
-	public Calendar getRequestTime() {
+	public Date getRequestTime() {
 		return requestTime;
 	}
 
 	/**
 	 * @param requestTime the requestTime to set
 	 */
-	public void setRequestTime(Calendar requestTime) {
+	public void setRequestTime(Date requestTime) {
 		this.requestTime = requestTime;
 	}
 
@@ -151,14 +153,14 @@ public class OfferRequest {
 	/**
 	 * @return the pathRequest
 	 */
-	public List<StepRequest> getPathRequest() {
+	public List<Step> getPathRequest() {
 		return pathRequest;
 	}
 
 	/**
 	 * @param pathRequest the pathRequest to set
 	 */
-	public void setPathRequest(List<StepRequest> pathRequest) {
+	public void setPathRequest(List<Step> pathRequest) {
 		this.pathRequest = pathRequest;
 	}
 }

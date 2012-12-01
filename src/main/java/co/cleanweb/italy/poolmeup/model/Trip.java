@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import com.googlecode.objectify.annotation.Subclass;
-import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 
 /**
@@ -55,11 +54,11 @@ public class Trip  extends AbstractObjectPersist {
 	}
 
 	public Double getDelay(Ride ride){
-		List<StepRequest> tripSteps = this.getSteps();
+		List<Step> tripSteps = this.getSteps();
 		int freePlaces = this.numberOfPlaces;
-		Iterator<StepRequest> it = tripSteps.iterator();
+		Iterator<Step> it = tripSteps.iterator();
 		while (it.hasNext()){
-			StepRequest currentStep = it.next();
+			Step currentStep = it.next();
 			if (currentStep.isFromPickToDrop()){
 				freePlaces--;
 				}
@@ -73,7 +72,7 @@ public class Trip  extends AbstractObjectPersist {
 		return null; //TODO: insert delay calculation
 	}
 	
-	public List<StepRequest> getSteps(){
+	public List<Step> getSteps(){
 		//TODO: query read steps from db
 		return null;
 	}

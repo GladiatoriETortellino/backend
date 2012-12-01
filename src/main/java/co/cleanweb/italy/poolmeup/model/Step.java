@@ -1,17 +1,17 @@
-package co.cleanweb.italy.poolmeup.model.transport;
+package co.cleanweb.italy.poolmeup.model;
 
-public class StepRequest {
+public class Step extends AbstractObjectPersist{
 	private Double latitude = null;
 	private Double longitude = null;
 	private boolean isFromPickToDrop = true;
 	
-	public StepRequest() {}
+	public Step() {}
 	
 	/**
 	 * @param latitude
 	 * @param longitude
 	 */
-	public StepRequest(Double latitude, Double longitude) {
+	public Step(Double latitude, Double longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -60,7 +60,7 @@ public class StepRequest {
 		this.isFromPickToDrop = isFromPickToDrop;
 	}
 	
-	public Double getDelay(StepRequest step){
+	public Double getDelay(Step step){
 		return null; //TODO: get Step Delay
 	}
 }

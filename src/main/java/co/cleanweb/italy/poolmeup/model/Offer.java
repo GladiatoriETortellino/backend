@@ -15,7 +15,6 @@ import com.googlecode.objectify.annotation.Subclass;
 
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
-import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
 
@@ -32,18 +31,18 @@ public class Offer extends AbstractObjectPersist {
 	
 	private Vehicle_Type vehicleType = null;
 	private Integer numberPlaces = 0;
-	private Calendar requestTime = null;
+	private Date requestTime = null;
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
-	private List<StepRequest> pathRequest = null;
+	private List<Step> pathRequest = null;
 
 	//CONSTRUCTORS
 	public Offer() {}
 	
 	public Offer(String phoneNumber, String userName, Vehicle_Type vehicleType,
-			Integer numberPlaces, Calendar requestTime, Boolean isStartingTime,
-			Integer maxThreshold, List<StepRequest> pathRequest) {
+			Integer numberPlaces, Date requestTime, Boolean isStartingTime,
+			Integer maxThreshold, List<Step> pathRequest) {
 		super();
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
@@ -123,59 +122,47 @@ public class Offer extends AbstractObjectPersist {
 		this.numberPlaces = numberPlaces;
 	}
 
-	/**
-	 * @return the requestTime
-	 */
-	public Calendar getRequestTime() {
+	public Date getRequestTime() {
 		return requestTime;
 	}
 
-	/**
-	 * @param requestTime the requestTime to set
-	 */
-	public void setRequestTime(Calendar requestTime) {
+	public void setRequestTime(Date requestTime) {
 		this.requestTime = requestTime;
 	}
 
-	/**
-	 * @return the isStartingTime
-	 */
 	public Boolean getIsStartingTime() {
 		return isStartingTime;
 	}
 
-	/**
-	 * @param isStartingTime the isStartingTime to set
-	 */
 	public void setIsStartingTime(Boolean isStartingTime) {
 		this.isStartingTime = isStartingTime;
 	}
 
-	/**
-	 * @return the maxThreshold
-	 */
 	public Integer getMaxThreshold() {
 		return maxThreshold;
 	}
 
-	/**
-	 * @param maxThreshold the maxThreshold to set
-	 */
 	public void setMaxThreshold(Integer maxThreshold) {
 		this.maxThreshold = maxThreshold;
 	}
 
-	/**
-	 * @return the pathRequest
-	 */
-	public List<StepRequest> getPathRequest() {
+	public List<Step> getPathRequest() {
 		return pathRequest;
 	}
 
-	/**
-	 * @param pathRequest the pathRequest to set
-	 */
-	public void setPathRequest(List<StepRequest> pathRequest) {
+	public void setPathRequest(List<Step> pathRequest) {
 		this.pathRequest = pathRequest;
 	}
+
+	
+	@Override
+	public String toString() {
+		return "Offer [phoneNumber=" + phoneNumber + ", userName=" + userName
+				+ ", vehicleType=" + vehicleType + ", numberPlaces="
+				+ numberPlaces + ", requestTime=" + requestTime
+				+ ", isStartingTime=" + isStartingTime + ", maxThreshold="
+				+ maxThreshold + ", pathRequest=" + pathRequest + "]";
+	}
+	
+
 }

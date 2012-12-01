@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import co.cleanweb.italy.poolmeup.model.Ride;
+import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.TripForARide;
 import co.cleanweb.italy.poolmeup.model.User;
 
@@ -13,7 +14,7 @@ public class RideRequest {
 	protected String userName = null;
 	protected Calendar requestTime = null;  
 	protected Integer numberOfPerson = null; 
-	protected StepRequest origin_destination = null;
+	protected Step origin_destination = null;
 	protected List<User> friends = null;
 	
 	public Long getUserID() {
@@ -40,10 +41,10 @@ public class RideRequest {
 	public void setNumberOfPerson(Integer numberOfPerson) {
 		this.numberOfPerson = numberOfPerson;
 	}
-	public StepRequest getOrigin_destination() {
+	public Step getOrigin_destination() {
 		return origin_destination;
 	}
-	public void setOrigin_destination(StepRequest origin_destination) {
+	public void setOrigin_destination(Step origin_destination) {
 		this.origin_destination = origin_destination;
 	}
 	public List<User> getFriends() {

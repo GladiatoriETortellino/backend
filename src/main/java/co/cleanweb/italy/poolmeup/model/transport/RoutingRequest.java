@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,6 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import co.cleanweb.italy.poolmeup.model.Step;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -27,7 +30,7 @@ public class RoutingRequest {
 	
 	private Vehicle_Type vehicle_Type;
 	private Calendar tdat;
-	private List<StepRequest> stops_findPath;
+	private List<Step> stops_findPath;
 
 	
 	//CONSTRUCTORS
@@ -37,12 +40,17 @@ public class RoutingRequest {
 	 * @param mode
 	 * @param process
 	 */
-	public RoutingRequest(Vehicle_Type vehicle_Type,Calendar tdat,List<StepRequest> steps) {
+	public RoutingRequest(Vehicle_Type vehicle_Type,Date tdat,List<Step> steps) {
 		super();
 		this.vehicle_Type=vehicle_Type;
 		if(tdat==null) {
 			this.tdat=GregorianCalendar.getInstance();
-		}else this.tdat=tdat;
+		}else {
+			this.tdat=Calendar.getInstance();
+			this.tdat.setTime(tdat);
+		}
+		
+		 
 		stops_findPath=steps;
 	}
 	
@@ -55,13 +63,13 @@ public class RoutingRequest {
 	 * @param s The <b>stop</b> to add to the <i>findPath</i> request
 	 * @return <code>true</code> if the operation succeded
 	 */
-	public boolean addStopToFindPathRequest(StepRequest s) {
+	public boolean addStopToFindPathRequest(Step s) {
 		stops_findPath.add(s);
 		return true;
 	}
 		
-	public StepRequest[] getStopsOfFindPathRequest() {
-		StepRequest[] toReturn= new StepRequest[stops_findPath.size()];
+	public Step[] getStopsOfFindPathRequest() {
+		Step[] toReturn= new Step[stops_findPath.size()];
 		stops_findPath.toArray(toReturn);
 		return toReturn;
 	}
@@ -76,7 +84,7 @@ public class RoutingRequest {
 	 * @param stopIndex 
 	 * @param s
 	 */
-	public boolean setStopOfFindPath(int stopIndex, StepRequest s) {
+	public boolean setStopOfFindPath(int stopIndex, Step s) {
 		if(stopIndex<0 || stopIndex>=stops_findPath.size()) return false;
 		stops_findPath.set(stopIndex, s);
 		return true;
@@ -92,7 +100,7 @@ public class RoutingRequest {
 
 		
 		StringBuilder sb=new StringBuilder("treq=findPath&mode="+vehicle_Type.toString()+"&tdat="+date+"&lang=ENG&");
-		StepRequest[] stops=getStopsOfFindPathRequest();
+		Step[] stops=getStopsOfFindPathRequest();
 		for(int i=0;i<stops.length;i++)
 			sb.append("pxco"+(i+1)+"="+stops[i].getLatitude()+"&pyco"+(i+1)+"="+stops[i].getLongitude()+"&");
 		sb.delete(sb.length()-1, sb.length());

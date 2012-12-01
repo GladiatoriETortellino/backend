@@ -10,7 +10,6 @@ import javax.persistence.Transient;
 import com.googlecode.objectify.annotation.Subclass;
 
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
-import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 
 @Subclass
 public class Ride extends AbstractObjectPersist {
@@ -20,7 +19,7 @@ public class Ride extends AbstractObjectPersist {
 	protected String userName = null;
 	protected Calendar requestTime = null;  
 	protected Integer numberOfPerson = null; 
-	protected StepRequest origin_destination = null;
+	protected Step origin_destination = null;
 	@Transient protected List<User> friends = null;
 	
 	public Ride(RideRequest rr){
@@ -118,11 +117,11 @@ public class Ride extends AbstractObjectPersist {
 		this.numberOfPerson = numberOfPerson;
 	}
 
-	public StepRequest getOrigin_destination() {
+	public Step getOrigin_destination() {
 		return origin_destination;
 	}
 
-	public void setOrigin_destination(StepRequest origin_destination) {
+	public void setOrigin_destination(Step origin_destination) {
 		this.origin_destination = origin_destination;
 	}
 
