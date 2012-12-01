@@ -35,6 +35,8 @@ public class Offer extends AbstractObjectPersist {
 
 
 	//CONSTRUCTORS
+	public Offer() {}
+	
 	public Offer(String phoneNumber, String userName, Vehicle_Type vehicleType,
 			Integer numberPlaces, Calendar requestTime, Boolean isStartingTime,
 			Integer maxThreshold, List<StepRequest> pathRequest) {
@@ -45,7 +47,7 @@ public class Offer extends AbstractObjectPersist {
 		this.numberPlaces = numberPlaces;
 		this.requestTime = requestTime;
 		this.isStartingTime = isStartingTime;
-		this.maxThreshold = maxThreshold;
+		this.maxThreshold = maxThreshold*60;
 		this.pathRequest = pathRequest;
 	}
 	
