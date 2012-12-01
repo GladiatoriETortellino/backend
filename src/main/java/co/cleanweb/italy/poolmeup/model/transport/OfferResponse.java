@@ -39,8 +39,6 @@ public class OfferResponse {
 		pathLink=routingServiceUrl+routingRequest.toString();
 	}
 
-	//METHODS
-		
 	//GETTERS
 	public String getId() {
 		return idDatabase;
