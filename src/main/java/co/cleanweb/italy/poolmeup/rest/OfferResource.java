@@ -32,7 +32,7 @@ public class OfferResource {
 	@Consumes({ MediaType.APPLICATION_JSON+"; charset=utf-8" })
 	public String helloServer(OfferRequest offerRequested) {
 //		PersistenceManager<Offer> manager = new PersistenceManagerObjectify<Offer>(Offer.class);
-//		manager.save(Collections.singletonList(offerRequested));
+//		manager.save(Collections.singletonList(new offer(offerRequested)));
 		return offerRequested.toString();
 	}
 }
