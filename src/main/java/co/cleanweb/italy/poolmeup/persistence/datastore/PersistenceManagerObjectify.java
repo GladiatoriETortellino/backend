@@ -68,4 +68,9 @@ class DAO extends DAOBase {
 		ObjectifyService.register(Offer.class);
 		ObjectifyService.register(Ride.class);
     }
+	
+	public DAO() {
+		super();
+		ObjectifyService.begin();
+	}
 }
