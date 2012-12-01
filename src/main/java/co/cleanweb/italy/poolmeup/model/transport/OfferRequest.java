@@ -3,6 +3,7 @@
  */
 package co.cleanweb.italy.poolmeup.model.transport;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class OfferRequest {
 	private String phoneNumber = null;
 	private String userName = null;
 	
-	private String vehicleType = null;
+	private Vehicle_Type vehicleType = null;
 	private Integer numberPlaces = 0;
-	private Date requestTime = null;
+	private Calendar requestTime = null;
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
@@ -56,14 +57,14 @@ public class OfferRequest {
 	/**
 	 * @return the vehicleType
 	 */
-	public String getVehicleType() {
+	public Vehicle_Type getVehicleType() {
 		return vehicleType;
 	}
 
 	/**
 	 * @param vehicleType the vehicleType to set
 	 */
-	public void setVehicleType(String vehicleType) {
+	public void setVehicleType(Vehicle_Type vehicleType) {
 		this.vehicleType = vehicleType;
 	}
 
@@ -84,14 +85,14 @@ public class OfferRequest {
 	/**
 	 * @return the requestTime
 	 */
-	public Date getRequestTime() {
+	public Calendar getRequestTime() {
 		return requestTime;
 	}
 
 	/**
 	 * @param requestTime the requestTime to set
 	 */
-	public void setRequestTime(Date requestTime) {
+	public void setRequestTime(Calendar requestTime) {
 		this.requestTime = requestTime;
 	}
 

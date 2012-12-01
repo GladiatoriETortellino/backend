@@ -25,7 +25,7 @@ public class RoutingRequest {
 	
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	private int mode;
+	private Vehicle_Type vehicle_Type;
 	private Calendar tdat;
 	private List<StepRequest> stops_findPath;
 
@@ -37,9 +37,9 @@ public class RoutingRequest {
 	 * @param mode
 	 * @param process
 	 */
-	public RoutingRequest(int mode,Calendar tdat,List<StepRequest> steps) {
+	public RoutingRequest(Vehicle_Type vehicle_Type,Calendar tdat,List<StepRequest> steps) {
 		super();
-		this.mode=mode;
+		this.vehicle_Type=vehicle_Type;
 		if(tdat==null) {
 			this.tdat=GregorianCalendar.getInstance();
 		}else this.tdat=tdat;
@@ -91,24 +91,27 @@ public class RoutingRequest {
 				  (tdat.get(Calendar.MINUTE)<10?0+""+tdat.get(Calendar.MINUTE):tdat.get(Calendar.MINUTE)) + "%3A00";
 
 		
-		StringBuilder sb=new StringBuilder("treq=findPath&mode="+mode+"&tdat="+date+"&lang=ENG&");
+		StringBuilder sb=new StringBuilder("treq=findPath&mode="+vehicle_Type.toString()+"&tdat="+date+"&lang=ENG&");
 		StepRequest[] stops=getStopsOfFindPathRequest();
 		for(int i=0;i<stops.length;i++)
 			sb.append("pxco"+(i+1)+"="+stops[i].getLatitude()+"&pyco"+(i+1)+"="+stops[i].getLongitude()+"&");
 		sb.delete(sb.length()-1, sb.length());
 			
 		return sb.toString();
+	}
+
+
+
+	public Vehicle_Type getVehicle_Type() {
+		return vehicle_Type;
+	}
+
+
+
+	public void setVehicle_Type(Vehicle_Type vehicle_Type) {
+		this.vehicle_Type = vehicle_Type;
 	};
-	
-	public int getMode() {
-		return mode;
-	}
-	/**
-	 * @param mode the mode to set
-	 */
-	public void setMode(int mode) {
-		this.mode = mode;
-	}
+
 
 
 	
