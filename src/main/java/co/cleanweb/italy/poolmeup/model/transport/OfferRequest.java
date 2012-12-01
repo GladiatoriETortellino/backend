@@ -36,7 +36,7 @@ public class OfferRequest {
 	 * @param pathRequest
 	 */
 	public OfferRequest(String phoneNumber, String userName,
-			String vehicleType, Integer numberPlaces, Date requestTime,
+			Vehicle_Type vehicleType, Integer numberPlaces, Calendar requestTime,
 			Boolean isStartingTime, Integer maxThreshold,
 			List<StepRequest> pathRequest) {
 		super();
