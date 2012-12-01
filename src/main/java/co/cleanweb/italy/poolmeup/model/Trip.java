@@ -3,8 +3,10 @@
  */
 package co.cleanweb.italy.poolmeup.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import com.googlecode.objectify.annotation.Subclass;
-
 import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 
@@ -52,8 +54,28 @@ public class Trip  extends AbstractObjectPersist {
 		this.numberOfPlaces = numberOfPlaces;
 	}
 
-	public Double getDelay(StepRequest ODStep){
+	public Double getDelay(Ride ride){
+		List<StepRequest> tripSteps = this.getSteps();
+		int freePlaces = this.numberOfPlaces;
+		Iterator<StepRequest> it = tripSteps.iterator();
+		while (it.hasNext()){
+			StepRequest currentStep = it.next();
+			if (currentStep.isFromPickToDrop()){
+				freePlaces--;
+				}
+			else{
+				freePlaces++;
+			} 
+			if (freePlaces >= ride.numberOfPerson){
+				currentStep.getDelay(ride.origin_destination);
+			}
+		}		
 		return null; //TODO: insert delay calculation
+	}
+	
+	public List<StepRequest> getSteps(){
+		//TODO: query read steps from db
+		return null;
 	}
 
 	public Trip() {}

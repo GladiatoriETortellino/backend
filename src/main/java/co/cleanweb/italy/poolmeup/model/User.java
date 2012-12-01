@@ -48,7 +48,7 @@ public class User extends AbstractObjectPersist {
 	public Trip getTrip(){
 		
 		Trip tripOfUser = null;
-		//TODO: insert query to the db
+		//TODO: query read from db
 		return tripOfUser;
 		
 	}

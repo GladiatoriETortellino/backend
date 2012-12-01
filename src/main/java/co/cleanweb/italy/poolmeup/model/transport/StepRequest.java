@@ -3,6 +3,7 @@ package co.cleanweb.italy.poolmeup.model.transport;
 public class StepRequest {
 	private Double latitude = null;
 	private Double longitude = null;
+	private boolean isFromPickToDrop = true;
 	
 	public StepRequest() {}
 	
@@ -49,5 +50,17 @@ public class StepRequest {
 	@Override
 	public String toString() {
 		return "{\"returnMessage\":\"this is a good offer request\"}";
+	}
+
+	public boolean isFromPickToDrop() {
+		return isFromPickToDrop;
+	}
+
+	public void setFromPickToDrop(boolean isFromPickToDrop) {
+		this.isFromPickToDrop = isFromPickToDrop;
+	}
+	
+	public Double getDelay(StepRequest step){
+		return null; //TODO: get Step Delay
 	}
 }
