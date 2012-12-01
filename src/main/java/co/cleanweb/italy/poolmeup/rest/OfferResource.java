@@ -42,6 +42,15 @@ public class OfferResource {
 		return Response.status(Response.Status.OK).entity("{\"response\":\"getOffers method\"}").build();
 	}
 	/**
+	 * 
+	 * @return
+	 */
+	@GET
+	@Path("/{offerId}")
+	public Response getSpecificPath() {
+		return Response.status(Response.Status.OK).entity("{\"response\":\"getOffers method\"}").build();
+	}
+	/**
 	 * create a new offer
 	 * 
 	 * @param offerRequested
