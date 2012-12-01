@@ -1,5 +1,6 @@
 package co.cleanweb.italy.poolmeup.model;
 
+import java.util.Iterator;
 import java.util.List;
 
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
@@ -15,7 +16,23 @@ public class Ride{
 	
 	public Ride(RideRequest rr){
 		
-		//copia degli attributi da RideRequest a Ride
+		this.userID = rr.getUserID();
+		this.userName = rr.getUserName();
+		this.numberOfPerson = rr.getNumberOfPerson(); 
+		this.origin_destination = rr.getOrigin_destination();
+		this.friends = rr.getFriends();
+		
+	}
+	
+	public List<User> getCompatibleTrips(){
+		
+		Iterator<User> it = this.friends.iterator();
+		while (it.hasNext()){
+			User currentFriend = it.next();
+			
+		}
+		
+		return null;
 		
 	}
 
