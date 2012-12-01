@@ -27,7 +27,7 @@ public class Request {
 	
 	private int mode;
 	private Calendar tdat;
-	private LinkedList<StepRequest> stops_findPath;
+	private List<StepRequest> stops_findPath;
 
 	
 	//CONSTRUCTORS
@@ -37,23 +37,13 @@ public class Request {
 	 * @param mode
 	 * @param process
 	 */
-	public Request(int mode,Calendar tdat) {
+	public Request(int mode,Calendar tdat,List<StepRequest> steps) {
 		super();
 		this.mode=mode;
 		if(tdat==null) {
 			this.tdat=GregorianCalendar.getInstance();
 		}else this.tdat=tdat;
-		stops_findPath=new LinkedList<StepRequest>();
-	}
-
-	
-	/**
-	 * 
-	 * @param rType
-	 * @param mode
-	 */
-	public Request(int mode) {
-		this(mode,null);
+		stops_findPath=steps;
 	}
 	
 	
