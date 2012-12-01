@@ -24,4 +24,6 @@ public class TripForARide {
 		
 	}
 	
+	public TripForARide() {}
+	
 }
