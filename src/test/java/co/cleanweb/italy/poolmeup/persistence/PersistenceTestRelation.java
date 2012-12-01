@@ -117,6 +117,8 @@ public class PersistenceTestRelation {
 		assertNotNull(managerStep.read(Collections.singleton(listFromOfferRequest.get(1).getKey())));
 		assertNotNull(managerStep.read(Collections.singleton(listFromOfferRequest.get(2).getKey())));
 		
+		// until here is ok
+		
 		Iterable<Step> steps = managerStep.localDao.ofy().query(Step.class).ancestor(offer).list();
 		int i=0;
 		Iterator<Step> it = steps.iterator();
