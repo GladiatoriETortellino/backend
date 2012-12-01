@@ -18,7 +18,7 @@ public class OfferRequest {
 	
 	private Vehicle_Type vehicleType = null;
 	private Integer numberPlaces = 0;
-	private Calendar requestTime = null;
+	private Date requestTime = null;
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
@@ -36,7 +36,7 @@ public class OfferRequest {
 	 * @param pathRequest
 	 */
 	public OfferRequest(String phoneNumber, String userName,
-			Vehicle_Type vehicleType, Integer numberPlaces, Calendar requestTime,
+			Vehicle_Type vehicleType, Integer numberPlaces, Date requestTime,
 			Boolean isStartingTime, Integer maxThreshold,
 			List<StepRequest> pathRequest) {
 		super();
@@ -109,14 +109,14 @@ public class OfferRequest {
 	/**
 	 * @return the requestTime
 	 */
-	public Calendar getRequestTime() {
+	public Date getRequestTime() {
 		return requestTime;
 	}
 
 	/**
 	 * @param requestTime the requestTime to set
 	 */
-	public void setRequestTime(Calendar requestTime) {
+	public void setRequestTime(Date requestTime) {
 		this.requestTime = requestTime;
 	}
 

@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,12 +38,17 @@ public class RoutingRequest {
 	 * @param mode
 	 * @param process
 	 */
-	public RoutingRequest(Vehicle_Type vehicle_Type,Calendar tdat,List<StepRequest> steps) {
+	public RoutingRequest(Vehicle_Type vehicle_Type,Date tdat,List<StepRequest> steps) {
 		super();
 		this.vehicle_Type=vehicle_Type;
 		if(tdat==null) {
 			this.tdat=GregorianCalendar.getInstance();
-		}else this.tdat=tdat;
+		}else {
+			this.tdat=Calendar.getInstance();
+			this.tdat.setTime(tdat);
+		}
+		
+		 
 		stops_findPath=steps;
 	}
 	

@@ -32,7 +32,7 @@ public class Offer extends AbstractObjectPersist {
 	
 	private Vehicle_Type vehicleType = null;
 	private Integer numberPlaces = 0;
-	private Calendar requestTime = null;
+	private Date requestTime = null;
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
@@ -43,7 +43,7 @@ public class Offer extends AbstractObjectPersist {
 	public Offer() {}
 	
 	public Offer(String phoneNumber, String userName, Vehicle_Type vehicleType,
-			Integer numberPlaces, Calendar requestTime, Boolean isStartingTime,
+			Integer numberPlaces, Date requestTime, Boolean isStartingTime,
 			Integer maxThreshold, List<StepRequest> pathRequest) {
 		super();
 		this.phoneNumber = phoneNumber;
@@ -79,5 +79,73 @@ public class Offer extends AbstractObjectPersist {
 	public void setNumberPlaces(Integer numberPlaces) {
 		this.numberPlaces = numberPlaces;
 	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Vehicle_Type getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(Vehicle_Type vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+	public Date getRequestTime() {
+		return requestTime;
+	}
+
+	public void setRequestTime(Date requestTime) {
+		this.requestTime = requestTime;
+	}
+
+	public Boolean getIsStartingTime() {
+		return isStartingTime;
+	}
+
+	public void setIsStartingTime(Boolean isStartingTime) {
+		this.isStartingTime = isStartingTime;
+	}
+
+	public Integer getMaxThreshold() {
+		return maxThreshold;
+	}
+
+	public void setMaxThreshold(Integer maxThreshold) {
+		this.maxThreshold = maxThreshold;
+	}
+
+	public List<StepRequest> getPathRequest() {
+		return pathRequest;
+	}
+
+	public void setPathRequest(List<StepRequest> pathRequest) {
+		this.pathRequest = pathRequest;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Offer [phoneNumber=" + phoneNumber + ", userName=" + userName
+				+ ", vehicleType=" + vehicleType + ", numberPlaces="
+				+ numberPlaces + ", requestTime=" + requestTime
+				+ ", isStartingTime=" + isStartingTime + ", maxThreshold="
+				+ maxThreshold + ", pathRequest=" + pathRequest + "]";
+	}
+	
+	
 	
 }
