@@ -4,9 +4,12 @@
 package co.cleanweb.italy.poolmeup.model;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
+import co.cleanweb.italy.poolmeup.model.transport.StepRequest;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
 
 /**
@@ -26,8 +29,20 @@ public class Offer{
 	public Offer() {}
 	
 	public Offer(OfferRequest offerRequest) {
-		StringBuilder sb=new StringBuilder("http://hackathon.opendata.sistemaits.com/dsps/?treq=findPath&tdes=0");
-		
+		this.request=offerRequest;
+		StringBuilder sb=new StringBuilder("http://hackathon.opendata.sistemaits.com/dsps/?treq=findPath&tdes=0&");
+		List<StepRequest> pathRequest=this.request.getPathRequest();
+		Iterator<StepRequest> it=pathRequest.iterator();
+		StepRequest step=null;
+		int counter=0;
+		while(it.hasNext()){
+			counter++;
+			step=it.next();
+			sb.append("pxcoo").append(counter).append("=").append(step.getLongitude());
+			sb.append("&");
+			sb.append("pycoo").append(counter).append("=").append(step.getLongitude());
+
+		}
 		
 		
 	}
