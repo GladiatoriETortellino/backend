@@ -71,8 +71,9 @@ public class PersistenceTestRelation {
 		for (User user : listFriends) {
 			assertNotNull(user);
 		}
-
-//		Iterable<Employee> subordinates = ofy.query(Employee.class).filter("manager", fred);
+		
+		Iterable<User> subordinates = ofy.query(User.class).filter("ride", ride);
+		assertEquals(3, listFriends.size());
 	}
 
 }
