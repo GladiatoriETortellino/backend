@@ -58,15 +58,10 @@ public class Offer extends AbstractObjectPersist {
 		this.isStartingTime = offerRequest.isStartingTime();
 		this.maxThreshold = offerRequest.getMaxThreshold();
 		this.pathRequest = offerRequest.getPathRequest();
-
 	}
 	
 	
 	//METHODS
-	public OfferRequest getRequest() {
-		return null;
-	}
-
 	/**
 	 * @return the numberPlaces
 	 */
