@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
+
 /**
  * @author micheleorsi
  *
@@ -32,7 +34,7 @@ public class RideResource {
 	 * @return
 	 */
 	@POST
-	public Response createNewRide() {
+	public Response createNewRide(RideRequest rideRequest) {
 		return Response.status(Response.Status.CREATED).entity("{\"response\":\"createNewRide method\"}").build();
 	}
 }

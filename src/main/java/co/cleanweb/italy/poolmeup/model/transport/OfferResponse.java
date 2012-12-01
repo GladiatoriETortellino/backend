@@ -6,14 +6,14 @@ package co.cleanweb.italy.poolmeup.model.transport;
 public class OfferResponse {
 
 	//ATTRIBUTES
-	private int id;//tel number
+	private String id;//tel number
 	private String username;
 	private String pathLink;
 	
 	//CONSTRUCORS
 	public OfferResponse(){}
 
-	public OfferResponse(int id, String username, String pathLink) {
+	public OfferResponse(String id, String username, String pathLink) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -24,7 +24,7 @@ public class OfferResponse {
 	//METHODS
 		
 	//GETTERS
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
