@@ -1,19 +1,23 @@
 package co.cleanweb.italy.poolmeup.model.transport;
 
+import co.cleanweb.italy.poolmeup.model.Offer;
+
 public class OfferResponse {
 
 	//ATTRIBUTES
-	private String id;//tel number
-	private String username;
+	private String idDatabase;//tel number
+	private String phoneNumber;
 	private String pathLink;
 	
 	//CONSTRUCORS
 	public OfferResponse(){}
+	
+	public OfferResponse(Offer persistedOffer) {}
 
-	public OfferResponse(String id, String username, String pathLink) {
+	public OfferResponse(String id, String phoneNumber, String pathLink) {
 		super();
-		this.id = id;
-		this.username = username;
+		this.idDatabase = id;
+		this.phoneNumber = phoneNumber;
 		this.pathLink = pathLink;
 	}
 
@@ -22,11 +26,11 @@ public class OfferResponse {
 		
 	//GETTERS
 	public String getId() {
-		return id;
+		return idDatabase;
 	}
 
 	public String getUsername() {
-		return username;
+		return phoneNumber;
 	}
 
 	public String getPathLink() {

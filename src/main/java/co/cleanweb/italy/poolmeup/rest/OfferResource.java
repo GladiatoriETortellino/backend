@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 
 import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
+import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
 import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
@@ -41,10 +42,10 @@ public class OfferResource {
 	 */
 	@POST
 	public Response createNewOffer(OfferRequest offerRequested) {
-//		PersistenceManager<Offer> manager = new PersistenceManagerObjectify<Offer>(Offer.class);
-//		manager.save(Collections.singletonList(offerRequested));
-//		return offerRequested.toString();
-		return Response.status(Response.Status.CREATED).entity("{\"response\":\"createNewOffer method\"}").build();
+		Offer persistedOffer = new Offer(offerRequested);
+		// persistiamo persistedOffer
+		OfferResponse offerResponse = new OfferResponse(persistedOffer);
+		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
 	}
 	/**
 	 * 
