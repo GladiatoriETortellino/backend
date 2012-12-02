@@ -29,8 +29,14 @@ public class Trip extends AbstractObjectPersist {
 	protected List<Step> stepList;
 	protected Calendar calculatedArrivalTime;
 	
-	public Trip(List<Step> stepList) {
+	public Trip(String driverName, String driverPhoneNumber, Double maxDelay, Vehicle_Type vehicleType, Integer numberOfPlaces, List<Step> stepList, Calendar calculatedArrivalTime) {
+		this.driverName = driverName;
+		this.driverPhoneNumber = driverPhoneNumber;
+		this.maxDelay = maxDelay;
+		this.vehicleType = vehicleType;
+		this.numberOfPlaces = numberOfPlaces;
 		this.stepList = stepList;
+		this.calculatedArrivalTime = calculatedArrivalTime;
 	}
 
 	public String getDriverName() {
