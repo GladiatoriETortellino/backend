@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import co.cleanweb.italy.poolmeup.model.transport.*;
+import co.cleanweb.italy.poolmeup.utils.HTTPRequest;
 
 /**
  * <p>JAXBContextResolver class.</p>

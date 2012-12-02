@@ -80,9 +80,9 @@ public class OfferResource {
 		}
 		managerStep.save(list_step);
 		
-		//Create the response
+//		//Create the response
 		OfferResponse offerResponse = new OfferResponse(offerRequested);
-		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
+		return Response.status(Response.Status.CREATED).entity(offerResponse).build(); 
 	}
 	/**
 	 * 

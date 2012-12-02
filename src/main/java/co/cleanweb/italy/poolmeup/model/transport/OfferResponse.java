@@ -5,21 +5,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import co.cleanweb.italy.poolmeup.model.Offer;
 
 
 /**
  * @author Simone De Cristofaro
  */
-
+@XmlRootElement
 public class OfferResponse {
-
+	@XmlElement
 	private static final String defaultVehicle=Vehicle_Type.AUTO.toString();
-	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyymmdd HH:mm:ss");
-	
 	//ATTRIBUTES
+	@XmlElement
 	private String idDatabase;//tel number
+	@XmlElement
 	private String phoneNumber;
+	@XmlElement
 	private String pathLink;
 	
 	//TODO: MICHELE - Da non pubblicare

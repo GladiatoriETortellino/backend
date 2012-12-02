@@ -3,9 +3,11 @@
  */
 package co.cleanweb.italy.poolmeup.model.transport;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import co.cleanweb.italy.poolmeup.model.Step;
 
@@ -13,17 +15,23 @@ import co.cleanweb.italy.poolmeup.model.Step;
  * @author micheleorsi
  *
  */
+@XmlRootElement
 public class OfferRequest {
-	
+	@XmlElement
 	private String phoneNumber = "";
+	@XmlElement
 	private String userName = "";
-	
+	@XmlElement
 	private Vehicle_Type vehicleType = Vehicle_Type.AUTO;
+	@XmlElement
 	private Integer numberPlaces = 0;
+	@XmlElement
 	private Date requestTime = new Date();
+	@XmlElement
 	private Boolean isStartingTime = false;
+	@XmlElement
 	private Integer maxThreshold = new Integer(8);
-	
+	@XmlElement
 	private List<Step> pathRequest = null;
 	
 	public OfferRequest() {}
@@ -90,9 +98,9 @@ public class OfferRequest {
 	/**
 	 * @param vehicleType the vehicleType to set
 	 */
-//	public void setVehicleType(Vehicle_Type vehicleType) {
-//		this.vehicleType = vehicleType;
-//	}
+	public void setVehicleType(Vehicle_Type vehicleType) {
+		this.vehicleType = vehicleType;
+	}
 
 	/**
 	 * @return the numberPlaces

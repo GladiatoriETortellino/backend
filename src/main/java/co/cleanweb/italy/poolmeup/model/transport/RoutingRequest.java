@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,6 +31,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import co.cleanweb.italy.poolmeup.model.Step;
+import co.cleanweb.italy.poolmeup.utils.HTTPRequest;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -36,16 +39,23 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  * @author Simone De Cristofaro
  * @created 20/ott/2012
  */
+@XmlRootElement
 public class RoutingRequest {
 	
 	private static final String routingServiceUrl="http://hackathon.opendata.sistemaits.com/dsps/"; 
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	@XmlElement
 	private Vehicle_Type vehicle_Type;
+	@XmlElement
 	private Calendar tdat;
+	@XmlElement
 	private List<Step> stops_findPath;
+	@XmlElement
 	private String endpoint;
+	@XmlElement
 	private String parameters;
+	@XmlElement
 	private String response;//the response xml
 	
 	//Main informations
