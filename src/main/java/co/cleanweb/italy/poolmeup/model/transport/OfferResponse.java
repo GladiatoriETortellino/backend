@@ -33,9 +33,9 @@ public class OfferResponse {
 	public OfferResponse(){}
 
 	
-	public OfferResponse(String idDatabase,String phoneNumber, OfferRequest request) {
+	public OfferResponse(String idDatabase, OfferRequest request) {
 		this.idDatabase=idDatabase;
-		this.phoneNumber=phoneNumber;
+		this.phoneNumber=request.getPhoneNumber();
 		routingRequest=new RoutingRequest(request.getVehicleType(), request.getRequestTime(), request.getPathRequest());
 		pathLink=routingRequest.toString();
 	}

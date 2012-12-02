@@ -85,7 +85,7 @@ public class OfferResource {
 		managerStep.save(list_step);
 		
 //		//Create the response
-		OfferResponse offerResponse = new OfferResponse(persistedOffer.getKey().toString(),persistedOffer.getPhoneNumber(),offerRequested);
+		OfferResponse offerResponse = new OfferResponse(persistedOffer.getKey().toString(),offerRequested);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build(); 
 	}
 	/**
