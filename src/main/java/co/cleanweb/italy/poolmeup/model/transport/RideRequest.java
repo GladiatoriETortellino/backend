@@ -3,18 +3,26 @@ package co.cleanweb.italy.poolmeup.model.transport;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.TripForARide;
 import co.cleanweb.italy.poolmeup.model.User;
-
+@XmlRootElement
 public class RideRequest {
-	
+	@XmlElement
 	protected Long userID = null;
+	@XmlElement
 	protected String userName = null;
+	@XmlElement
 	protected Calendar requestTime = null;  
+	@XmlElement
 	protected Integer numberOfPerson = null; 
+	@XmlElement
 	protected List<Step> odSteps = null;
+	@XmlElement
 	protected List<User> friends = null;
 	
 	public Long getUserID() {
