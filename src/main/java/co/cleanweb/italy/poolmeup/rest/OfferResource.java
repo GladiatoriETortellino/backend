@@ -3,6 +3,8 @@
  */
 package co.cleanweb.italy.poolmeup.rest;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -27,6 +29,8 @@ import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
+import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
+import co.cleanweb.italy.poolmeup.model.transport.RoutingRequest;
 import co.cleanweb.italy.poolmeup.persistence.datastore.FakeDB;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
@@ -53,7 +57,7 @@ public class OfferResource {
 	 */
 	@GET
 	public Response getOffers() {
-		return Response.status(Response.Status.OK).entity("{\"response\":\"getOffers method\"}").build();
+		return Response.status(Response.Status.OK).entity(FakeDB.offerDB).build();
 	}
 	/**
 	 * 
@@ -62,7 +66,18 @@ public class OfferResource {
 	@GET
 	@Path("/{offerId}")
 	public Response getSpecificPath(@PathParam("offerId") Long offerId) {
-		return Response.status(Response.Status.OK).entity(FakeDB.offerDB.get(offerId)).build();
+		Offer dbOffer = FakeDB.offerDB.get(offerId);
+		OfferResponse returnOffer = new OfferResponse();
+		returnOffer.setIdDatabase(dbOffer.getKey());
+		returnOffer.setPhoneNumber(dbOffer.getPhoneNumber());
+		if(dbOffer.getPathRequest().size()==2) {
+			returnOffer.setPathLink(null);
+		} else {
+			RoutingRequest routingRequest=new RoutingRequest(dbOffer.getVehicleType(), dbOffer.getRequestTime(), dbOffer.getPathRequest());
+			String pathLink=routingRequest.toString();
+			returnOffer.setPathLink(pathLink);
+		}
+		return Response.status(Response.Status.OK).entity(returnOffer).build();
 	}
 	/**
 	 * create a new offer
@@ -87,7 +102,7 @@ public class OfferResource {
 		FakeDB.countOffer++;
 		
 //		//Create the response
-		OfferResponse offerResponse = new OfferResponse(persistedOffer.getKey().toString(),offerRequested);
+		OfferResponse offerResponse = new OfferResponse(persistedOffer.getKey(),offerRequested);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build(); 
 	}
 	/**
@@ -109,10 +124,25 @@ public class OfferResource {
 	 * @return
 	 */
 	@POST
-	@Path("/{offerId}/join")
-	public Response joinOffer() {
-		// cristallizzo richiesta
-		// faccio push notification al guidatore
+	@Path("/{userPhoneNumber}/join")
+	public Response joinOffer(@PathParam("userPhoneNumber") String userPhoneNumber, RideRequest rideRequested) {
+		Collection<Offer> listAvailable = FakeDB.offerDB.values();
+		Offer selectedOffer = null;
+		for (Offer offer : listAvailable) {
+			if(offer.getPhoneNumber().equals(userPhoneNumber)) {
+				selectedOffer = offer;
+				List<Step> listSteps = offer.getPathRequest();
+				List<Step> listRequestedSteps = rideRequested.getODSteps();
+				List<Step> newList = new ArrayList<Step>();
+				newList.add(listSteps.get(0));
+				newList.add(listRequestedSteps.get(0));
+				newList.add(listRequestedSteps.get(1));
+				newList.add(listSteps.get(listSteps.size()-1));
+				
+				FakeDB.offerDB.remove(selectedOffer.getKey());
+				offer.setPathRequest(newList);
+			}
+		}
 		return Response.status(Response.Status.OK).entity("{\"response\":\"request pushed\"}").build();
 	}
 

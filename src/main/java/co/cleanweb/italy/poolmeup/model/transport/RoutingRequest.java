@@ -90,7 +90,7 @@ public class RoutingRequest {
 		stops_findPath=steps;
 		Step[] stops=getStopsOfFindPathRequest();
 		for(int i=0;i<stops.length;i++)
-			sb.append("pxco"+(i+1)+"="+stops[i].getLat()+"&pyco"+(i+1)+"="+stops[i].getLng()+"&");
+			sb.append("pyco"+(i+1)+"="+stops[i].getLat()+"&pxco"+(i+1)+"="+stops[i].getLng()+"&");
 		sb.delete(sb.length()-1, sb.length());
 			
 		parameters= sb.toString();
