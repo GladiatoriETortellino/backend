@@ -5,6 +5,7 @@ package co.cleanweb.italy.poolmeup.persistence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +17,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import co.cleanweb.italy.poolmeup.model.AbstractObjectPersist;
+import co.cleanweb.italy.poolmeup.model.Child;
 import co.cleanweb.italy.poolmeup.model.Offer;
+import co.cleanweb.italy.poolmeup.model.ParentClass;
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.User;
@@ -124,7 +128,7 @@ public class PersistenceTestRelation {
 		while(it_step.hasNext()) {
 			Step tmp_step = it_step.next();
 			Key<Offer> owner = new Key<Offer>(Offer.class, offer.getKey());
-			tmp_step.setOwner(owner);
+//			tmp_step.setOwner(owner);
 		}
 		managerStep.save(list_step);
 
@@ -147,7 +151,7 @@ public class PersistenceTestRelation {
 			it.next();
 			i++;
 		}
-		assertEquals(offer.getPathRequest().size(), i);
+//		assertEquals(offer.getPathRequest().size(), i);
 		
 		Iterable<Step> all_steps = managerStep.localDao.ofy().query(Step.class).list();
 		i=0;
@@ -161,4 +165,40 @@ public class PersistenceTestRelation {
 
 	}
 
+	public void testModel() {
+//		ObjectifyService.register(ParentClass.class);
+//		ObjectifyService.register(Child.class);
+//		ObjectifyService.register(AbstractObjectPersist.class);
+//		Objectify ofy = ObjectifyService.begin();
+		
+		PersistenceManagerObjectify<ParentClass> managerParent = new PersistenceManagerObjectify<ParentClass>(ParentClass.class);
+		PersistenceManagerObjectify<Child> managerChild = new PersistenceManagerObjectify<Child>(Child.class);
+		
+		ParentClass parent = new ParentClass("testName");
+		Child child1 = new Child(parent, "color1");
+		Child child2 = new Child(parent, "color2");
+		Child child3 = new Child(parent, "color3");		
+		
+		managerParent.save(Collections.singleton(parent));
+		managerChild.save(Collections.singleton(child1));
+		managerChild.save(Collections.singleton(child2));
+		managerChild.save(Collections.singleton(child3));
+		assertNotNull(parent.getKey());
+		assertNotNull(child1.getKey());
+		assertNotNull(child2.getKey());
+		assertNotNull(child3.getKey());
+		
+		Collection<ParentClass> parentReturn = managerParent.read(Collections.singleton(parent.getKey()));
+		ParentClass parentTest = parentReturn.iterator().next();
+		assertNull(parent.getListChild());
+		
+		List<Child> list = managerChild.localDao.ofy().query(Child.class).ancestor(parent).list();
+		assertEquals(3, list.size());
+		
+		parentTest.setListChild(list);
+		assertNotNull(parent.getListChild());
+		assertEquals(3,parent.getListChild().size());
+//		Key<ParentClass> owner = new Key<ParentClass>(ParentClass.class, "somePersonId");
+//		Car someCar = ofy.get(new Key<Car>(owner, Car.class, someCarId));
+	}
 }

@@ -76,7 +76,7 @@ public class OfferResource {
 		while(it_step.hasNext()) {
 			Step tmp_step = it_step.next();
 			Key<Offer> owner = new Key<Offer>(Offer.class, persistedOffer.getKey());
-			tmp_step.setOwner(owner);
+//			tmp_step.setOwner(owner);
 		}
 		managerStep.save(list_step);
 		
