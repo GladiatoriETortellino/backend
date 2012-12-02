@@ -78,8 +78,8 @@ public class Trip extends AbstractObjectPersist {
 		//costruisco il nuovo percorso
 		List<Step> newSteps = new ArrayList<Step>();
 		newSteps.add(this.stepList.get(0));
-		newSteps.add(ride.getODSteps().get(0));
-		newSteps.add(ride.getODSteps().get(1));
+		newSteps.add(ride.getOdSteps().get(0));
+		newSteps.add(ride.getOdSteps().get(1));
 		newSteps.add(this.stepList.get(1));
 		//costruisco la route request
 		RoutingRequest rr = new RoutingRequest(this.vehicleType, new Date(), newSteps);

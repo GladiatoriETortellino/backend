@@ -25,8 +25,6 @@ public abstract class AbstractObjectPersist implements ObjectPersistable {
 	private Date creationDate = null;
 	private Date updatedDate = null;
 	
-//	@Parent private Key<?> owner;
-	
 
 	public AbstractObjectPersist() {}
 
@@ -101,14 +99,5 @@ public abstract class AbstractObjectPersist implements ObjectPersistable {
 			this.updatedDate = new Date();	
 		}
 	}
-
-//	public Key<?> getOwner() {
-//		return owner;
-//	}
-//
-//	public void setOwner(Key<?> owner) {
-//		this.owner = owner;
-//	}
-	
 	
 }
