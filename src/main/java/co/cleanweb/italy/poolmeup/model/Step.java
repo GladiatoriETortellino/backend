@@ -1,13 +1,21 @@
 package co.cleanweb.italy.poolmeup.model;
 
+import javax.jdo.annotations.Element;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass
+@XmlRootElement
 public class Step extends AbstractObjectPersist{
+	@XmlElement 
 	private Double lat = null;
+	@XmlElement 
 	private Double lng = null;
+	@XmlElement 
 	private String name="";
 	private boolean isFromPickToDrop = true;
 	
