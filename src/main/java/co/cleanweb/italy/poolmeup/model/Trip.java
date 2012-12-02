@@ -6,7 +6,6 @@ package co.cleanweb.italy.poolmeup.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import com.googlecode.objectify.annotation.Subclass;
 
@@ -21,6 +20,7 @@ import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 public class Trip extends AbstractObjectPersist {
 	
 	private static final Double inf = 99999.0;
+	
 	protected String driverName;
 	protected String driverPhoneNumber;
 	protected Double maxDelay;
@@ -31,8 +31,14 @@ public class Trip extends AbstractObjectPersist {
 	
 	public Trip() {}
 	
-	public Trip(List<Step> stepList) {
+	public Trip(String driverName, String driverPhoneNumber, Double maxDelay, Vehicle_Type vehicleType, Integer numberOfPlaces, List<Step> stepList, Calendar calculatedArrivalTime) {
+		this.driverName = driverName;
+		this.driverPhoneNumber = driverPhoneNumber;
+		this.maxDelay = maxDelay;
+		this.vehicleType = vehicleType;
+		this.numberOfPlaces = numberOfPlaces;
 		this.stepList = stepList;
+		this.calculatedArrivalTime = calculatedArrivalTime;
 	}
 
 	public String getDriverName() {
@@ -79,9 +85,9 @@ public class Trip extends AbstractObjectPersist {
 		RoutingRequest rr = new RoutingRequest(this.vehicleType, new Date(), newSteps);
 		rr.toString();
 		
-		//la mando
+		//TODO: la mando
 		
-		Calendar newArrivalTime = null; //prendo il tempo di arrivo
+		Calendar newArrivalTime = null; //TODO: prendo il tempo di arrivo
 		long sec1 = newArrivalTime.getTimeInMillis() / 1000;
 		long sec2 = this.calculatedArrivalTime.getTimeInMillis() / 1000;
 		if (sec1 - sec2 > this.maxDelay){
