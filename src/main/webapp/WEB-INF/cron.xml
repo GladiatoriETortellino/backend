@@ -4,4 +4,9 @@
     <description>Clean up sessions</description>
     <schedule>every 30 minutes</schedule>
   </cron>
+  <cron>
+    <url>/rest/offers</url>
+    <description>Clean up sessions</description>
+    <schedule>every 2 minutes</schedule>
+  </cron>
 </cronentries>

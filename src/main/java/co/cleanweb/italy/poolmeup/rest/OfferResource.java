@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -80,6 +81,12 @@ public class OfferResource {
 		FakeDB.offerDB.remove(offerId);
 		return Response.status(Response.Status.OK).entity(returnOffer).build();
 	}
+	@DELETE
+	@Path("/{offerId}")
+	public Response removeOffer(@PathParam("offerId") Long offerId) {
+		FakeDB.offerDB.remove(offerId);
+		return Response.status(Response.Status.NO_CONTENT).entity("{\"response\":\"offer removed\"}").build();
+	}
 	/**
 	 * create a new offer
 	 * 
@@ -133,12 +140,16 @@ public class OfferResource {
 			if(offer.getPhoneNumber().equals(userPhoneNumber)) {
 				selectedOffer = offer;
 				List<Step> listSteps = offer.getPathRequest();
+				log.info("first step"+listSteps.get(0).getName());
+				log.info("second step"+listSteps.get(1).getName());
 				List<Step> listRequestedSteps = rideRequested.getODSteps();
+				log.info("first step listRequestedSteps"+listRequestedSteps.get(0).getName());
+				log.info("second step listRequestedSteps"+listRequestedSteps.get(1).getName());
 				List<Step> newList = new ArrayList<Step>();
 				newList.add(listSteps.get(0));
 				newList.add(listRequestedSteps.get(0));
 				newList.add(listRequestedSteps.get(1));
-				newList.add(listSteps.get(listSteps.size()-1));
+				newList.add(listSteps.get(1));
 				
 //				FakeDB.offerDB.remove(selectedOffer.getKey());
 				offer.setPathRequest(newList);
