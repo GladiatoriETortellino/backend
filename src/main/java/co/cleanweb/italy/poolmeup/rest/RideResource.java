@@ -48,6 +48,7 @@ public class RideResource {
 	public Response createNewRide(RideRequest rideRequested) {
 		Ride persistedRide = new Ride(rideRequested);
 		managerRide.save(Collections.singleton(persistedRide));
+		
 		RideResponse rideResponse = new RideResponse(persistedRide);
 		return Response.status(Response.Status.CREATED).entity(rideResponse).build();
 	}
