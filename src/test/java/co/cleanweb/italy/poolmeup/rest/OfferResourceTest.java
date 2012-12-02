@@ -88,18 +88,33 @@ public class OfferResourceTest {
 	@Test
 	public void testCreateNewOffer() {
 		List<Step> list = new ArrayList<Step>();
+		Step testStep1 = new Step(Double.valueOf(12.23),Double.valueOf(15.23));
+		Step testStep2 = new Step(Double.valueOf(12.23),Double.valueOf(15.23));
+		Step testStep3 = new Step(Double.valueOf(12.23),Double.valueOf(15.23));
+		list.add(testStep1);
+		list.add(testStep2);
+		list.add(testStep3);
+		
 		offerRequest = new OfferRequest("333333333333", "Pippo", Vehicle_Type.AUTO, Integer.valueOf(1), new Date(), Boolean.valueOf(true), Integer.valueOf(30), list);
 		Response response = offerResource.createNewOffer(offerRequest);
 		
 		PersistenceManagerObjectify<Offer> managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
 		List<Offer> listOffer = managerOffer.localDao.ofy().query(Offer.class).list();
 		assertNotNull(listOffer);
-//		assertEquals(1, listOffer.size());
-//		Offer readOffer = listOffer.get(0);
-//		assertEquals(true,readOffer.getIsStartingTime().booleanValue());
-//		assertEquals(Integer.valueOf(30),readOffer.getMaxThreshold());
-//		assertEquals(Integer.valueOf(1),readOffer.getNumberPlaces());
-//		assertEquals("333333333333",readOffer.getPhoneNumber());
+		assertEquals(1, listOffer.size());
+		Offer readOffer = listOffer.get(0);
+		assertEquals(true,readOffer.getIsStartingTime().booleanValue());
+		assertEquals(Integer.valueOf(30),readOffer.getMaxThreshold());
+		assertEquals(Integer.valueOf(1),readOffer.getNumberPlaces());
+		assertEquals("333333333333",readOffer.getPhoneNumber());
+		assertNull(readOffer.getPathRequest());
+		
+		PersistenceManagerObjectify<Step> managerStep = new PersistenceManagerObjectify<Step>(Step.class);
+		List<Step> listStep = managerStep.localDao.ofy().query(Step.class).ancestor(readOffer).list();
+		assertNotNull(listStep);
+		assertEquals(Double.valueOf(12.23), listStep.get(0).getLatitude());
+		assertEquals(Double.valueOf(15.23), listStep.get(0).getLongitude());
+
 	}
 
 	/**

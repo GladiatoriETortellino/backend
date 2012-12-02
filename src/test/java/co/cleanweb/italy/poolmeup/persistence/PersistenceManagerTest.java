@@ -18,7 +18,6 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
-import co.cleanweb.italy.poolmeup.model.AbstractObjectPersist;
 import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.Trip;
