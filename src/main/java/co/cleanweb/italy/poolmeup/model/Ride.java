@@ -23,8 +23,8 @@ public class Ride extends AbstractObjectPersist {
 	protected String userName = null;
 	protected Calendar requestTime = null;  
 	protected Integer numberOfPerson = null; 
-	@Transient protected List<Step> odSteps = null;
-	@Transient protected List<User> friends = null;
+	protected List<Step> odSteps = null;
+	protected List<User> friends = null;
 	
 	public Ride(RideRequest rr){
 		
@@ -128,11 +128,17 @@ public class Ride extends AbstractObjectPersist {
 		this.numberOfPerson = numberOfPerson;
 	}
 
-	public List<Step> getODSteps() {
+	/**
+	 * @return the odSteps
+	 */
+	public List<Step> getOdSteps() {
 		return odSteps;
 	}
 
-	public void setODSteps(List<Step> odSteps) {
+	/**
+	 * @param odSteps the odSteps to set
+	 */
+	public void setOdSteps(List<Step> odSteps) {
 		this.odSteps = odSteps;
 	}
 

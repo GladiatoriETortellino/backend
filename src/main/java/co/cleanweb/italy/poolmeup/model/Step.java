@@ -9,7 +9,9 @@ public class Step extends AbstractObjectPersist{
 	private Double latitude = null;
 	private Double longitude = null;
 	private boolean isFromPickToDrop = true;
-	 
+	
+	@Parent
+	private Key<Offer> offer;
 	
 	public Step() {}
 	
@@ -68,6 +70,20 @@ public class Step extends AbstractObjectPersist{
 	
 	public Double getDelay(Step step){
 		return null; //TODO: get Step Delay
+	}
+
+	/**
+	 * @return the offer
+	 */
+	public Key<Offer> getOffer() {
+		return offer;
+	}
+
+	/**
+	 * @param offer the offer to set
+	 */
+	public void setOffer(Key<Offer> offer) {
+		this.offer = offer;
 	}
 
 

@@ -68,16 +68,20 @@ public class OfferResource {
 	public Response createNewOffer(OfferRequest offerRequested) {
 		// persist the offer on DB
 		Offer persistedOffer = new Offer(offerRequested);
+		// ottengo la lista di path richiesti dall'utente
+		List<Step> list_step=offerRequested.getPathRequest();
+//		for (Step step : list_step) {
+//			step.setOffer(persistedOffer);
+//		}
+		// persisto l'offerta
 		managerOffer.save(Collections.singleton(persistedOffer));
-
-		List<Step> list_step=persistedOffer.getPathRequest();
-		
-		Iterator<Step> it_step=list_step.iterator();
-		while(it_step.hasNext()) {
-			Step tmp_step = it_step.next();
-			Key<Offer> owner = new Key<Offer>(Offer.class, persistedOffer.getKey());
-			tmp_step.setOwner(owner);
-		}
+//		Iterator<Step> it_step=list_step.iterator();
+//		while(it_step.hasNext()) {
+//			Step tmp_step = it_step.next();
+//			Key<Offer> owner = new Key<Offer>(Offer.class, persistedOffer.getKey());
+//			tmp_step.setOwner(owner);
+//		}
+		// persisto la lista di step
 		managerStep.save(list_step);
 		
 //		//Create the response
