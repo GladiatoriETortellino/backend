@@ -26,6 +26,7 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
 	private static final Logger log = Logger
 	.getLogger(JacksonConfigurator.class.getName());
     private static ObjectMapper mapper = null;
+    public final static String dateFormat = "dd/MM/yyyy HH:mm";
     
     /**
      * <p>Constructor for JacksonConfigurator.</p>
@@ -35,10 +36,10 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
     	log.fine("initialize mapper");
     	mapper = new ObjectMapper();
     	SerializationConfig serConfig = mapper.getSerializationConfig();
-        serConfig.withDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+        serConfig.withDateFormat(new SimpleDateFormat(dateFormat));
         serConfig.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
         DeserializationConfig deserializationConfig = mapper.getDeserializationConfig();
-        deserializationConfig.withDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+        deserializationConfig.withDateFormat(new SimpleDateFormat(dateFormat));
 //        mapper.configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES,false);
         mapper.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
