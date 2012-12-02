@@ -81,7 +81,7 @@ public class OfferResource {
 		managerStep.save(list_step);
 		
 //		//Create the response
-		OfferResponse offerResponse = new OfferResponse(offerRequested);
+		OfferResponse offerResponse = new OfferResponse(persistedOffer.getKey().toString(),persistedOffer.getPhoneNumber(),offerRequested);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build(); 
 	}
 	/**
@@ -92,10 +92,11 @@ public class OfferResource {
 	@POST
 	@Path("/{offerId}")
 	public Response updateOffer(OfferRequest offerRequested) {
-		Offer persistedOffer = new Offer(offerRequested);
-		managerOffer.update(Collections.singleton(persistedOffer));
-		OfferResponse offerResponse = new OfferResponse(offerRequested);
-		return Response.status(Response.Status.OK).entity(offerResponse).build();
+		
+//		Offer persistedOffer = new Offer(offerRequested);
+//		managerOffer.update(Collections.singleton(persistedOffer));
+//		OfferResponse offerResponse = new OfferResponse(offerRequested);
+		return Response.status(Response.Status.OK).entity(null).build();
 	}
 	/**
 	 * 

@@ -188,10 +188,10 @@ public class RoutingRequest {
 		return inst;
 	}
 	public Calendar getArrivalTime() {
-		return inst[inst.length-1];
+		return inst!=null? inst[inst.length-1]:null;
 	}
 	public Double getCO2Consuption() {
-		return CO2[CO2.length-1];
+		return CO2!=null?CO2[CO2.length-1]:0;
 	}
 
 	public Double[] getCO2() {
