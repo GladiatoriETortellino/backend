@@ -66,11 +66,8 @@ public class OfferResource {
 	 */
 	@POST
 	public Response createNewOffer(OfferRequest offerRequested) {
+		// persist the offer on DB
 		Offer persistedOffer = new Offer(offerRequested);
-		//Persist on DB
-		ObjectifyFactory ofy=new ObjectifyFactory();
-//		long key_offer= ofy.allocateId(Offer.class);
-//		persistedOffer.setKey(key_offer);
 		managerOffer.save(Collections.singleton(persistedOffer));
 
 		List<Step> list_step=persistedOffer.getPathRequest();

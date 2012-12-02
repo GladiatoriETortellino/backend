@@ -10,9 +10,7 @@ import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-import co.cleanweb.italy.poolmeup.model.Offer;
-import co.cleanweb.italy.poolmeup.model.Trip;
-import co.cleanweb.italy.poolmeup.model.User;
+import co.cleanweb.italy.poolmeup.model.transport.*;
 
 /**
  * <p>JAXBContextResolver class.</p>
@@ -25,7 +23,16 @@ public class JAXBContextResolver {
 			.getLogger(JAXBContextResolver.class.getName());
 
 	private static JAXBContext context = null;
-	private final Class<?>[] classTypes = new Class[] { User.class, Offer.class, Trip.class };
+	private final Class<?>[] classTypes = new Class[] { 
+			HTTPRequest.class,
+			OfferRequest.class,
+			OfferResponse.class,
+			RideRequest.class,
+			RideResponse.class,
+			RouteStop.class,
+			RoutingRequest.class,
+			Vehicle_Type.class
+	};
 
 	/**
 	 * <p>Constructor for JAXBContextResolver.</p>
