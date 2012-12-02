@@ -177,7 +177,12 @@ public class RoutingRequest {
 	public Calendar[] getInst() {
 		return inst;
 	}
-
+	public Calendar getArrivalTime() {
+		return inst[inst.length-1];
+	}
+	public Double getCO2Consuption() {
+		return CO2[CO2.length-1];
+	}
 
 	public Double[] getCO2() {
 		return CO2;

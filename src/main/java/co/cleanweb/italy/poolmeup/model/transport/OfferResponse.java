@@ -22,7 +22,7 @@ public class OfferResponse {
 	private String phoneNumber;
 	private String pathLink;
 	
-	//Da non pubblicare
+	//TODO: MICHELE - Da non pubblicare
 	private RoutingRequest routingRequest;
 
 	//CONSTRUCORS
