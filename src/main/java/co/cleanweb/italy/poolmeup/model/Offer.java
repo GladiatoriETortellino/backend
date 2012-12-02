@@ -36,7 +36,7 @@ public class Offer extends AbstractObjectPersist {
 	private Boolean isStartingTime;
 	private Integer maxThreshold;
 	
-	private List<Step> pathRequest = null;
+	@Transient private List<Step> pathRequest = null;
 
 	//CONSTRUCTORS
 	public Offer() {}

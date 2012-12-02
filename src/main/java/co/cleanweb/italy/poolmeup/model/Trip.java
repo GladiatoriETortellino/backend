@@ -29,6 +29,8 @@ public class Trip extends AbstractObjectPersist {
 	protected List<Step> stepList;
 	protected Calendar calculatedArrivalTime;
 	
+	public Trip() {}
+	
 	public Trip(List<Step> stepList) {
 		this.stepList = stepList;
 	}

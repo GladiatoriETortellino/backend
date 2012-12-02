@@ -20,12 +20,17 @@ import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.User;
+import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
+import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.util.DAOBase;
 
 /**
  * @author micheleorsi
@@ -59,7 +64,7 @@ public class PersistenceTestRelation {
 
 	@Test
 	public void testRideUser() {
-		
+		if(false) {
 		PersistenceManagerObjectify<Ride> managerRide = new PersistenceManagerObjectify<Ride>(Ride.class);
 		PersistenceManagerObjectify<User> managerUser = new PersistenceManagerObjectify<User>(User.class);
 		
@@ -88,36 +93,51 @@ public class PersistenceTestRelation {
 			i++;
 		}
 		assertEquals(3, i);
+		}
 	}
 	
 	@Test
 	public void testOfferAndStep() {
-		
+		//SIMONE
 		PersistenceManagerObjectify<Offer> managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
 		PersistenceManagerObjectify<Step> managerStep = new PersistenceManagerObjectify<Step>(Step.class);
 		
-		Offer offer = new Offer();
-		Step step1 = new Step();
-		Step step2 = new Step();
-		Step step3 = new Step();
-		List<Step> listFromOfferRequest = new ArrayList<Step>();
-		listFromOfferRequest.add(step1);
-		listFromOfferRequest.add(step2);
-		listFromOfferRequest.add(step3);
+		List<Step> pathRequest=new ArrayList<Step>(2);
+		Step origin=new Step(12.38228, 41.93889);
+		Step destination=new Step(12.43446, 41.91284);
+		pathRequest.add(origin);
+		pathRequest.add(destination);
+		OfferRequest offerRequest=new OfferRequest("3929428039", "bo", Vehicle_Type.AUTO, 
+				3, new java.util.Date(), true, 3600, pathRequest);
+
 		
-		// ideal start from POST request: Offer and List<Step>
+		Offer offer = new Offer(offerRequest);
+		ObjectifyFactory ofy=new ObjectifyFactory();
+//		long key_offer= ofy.allocateId(Offer.class);
+//		offer.setKey(key_offer);
+		
 		managerOffer.save(Collections.singleton(offer));
-		// offer.getPathRequest(); -> listFromOfferRequest
-		managerStep.save(listFromOfferRequest);
+
+		List<Step> list_step=offer.getPathRequest();
 		
-		assertNotNull(offer.getKey());
-		assertNotNull(managerOffer.read(Collections.singleton(offer.getKey())));
+		Iterator<Step> it_step=list_step.iterator();
+		while(it_step.hasNext()) {
+			Step tmp_step = it_step.next();
+			Key<Offer> owner = new Key<Offer>(Offer.class, offer.getKey());
+			tmp_step.setOwner(owner);
+		}
+		managerStep.save(list_step);
+
 		
-		assertNotNull(managerStep.read(Collections.singleton(listFromOfferRequest.get(0).getKey())));
-		assertNotNull(managerStep.read(Collections.singleton(listFromOfferRequest.get(1).getKey())));
-		assertNotNull(managerStep.read(Collections.singleton(listFromOfferRequest.get(2).getKey())));
-		
-		// until here is ok
+		Step step_fake_1=new Step();
+		Step step_fake_2=new Step();
+		Step step_fake_3=new Step();
+		List<Step> list_step_fake=new ArrayList<Step>(3);
+		list_step_fake.add(step_fake_1);
+		list_step_fake.add(step_fake_2);
+		list_step_fake.add(step_fake_3);
+		managerStep.save(list_step_fake);
+
 		
 		Iterable<Step> steps = managerStep.localDao.ofy().query(Step.class).ancestor(offer).list();
 		int i=0;
@@ -127,7 +147,18 @@ public class PersistenceTestRelation {
 			it.next();
 			i++;
 		}
-		assertEquals(3, i);
+		assertEquals(offer.getPathRequest().size(), i);
+		
+		Iterable<Step> all_steps = managerStep.localDao.ofy().query(Step.class).list();
+		i=0;
+		it = all_steps.iterator();
+		
+		while(it.hasNext()) {
+			it.next();
+			i++;
+		}
+		assertEquals(offer.getPathRequest().size()+list_step_fake.size(), i);
+
 	}
 
 }

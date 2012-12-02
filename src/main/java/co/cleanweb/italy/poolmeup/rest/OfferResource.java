@@ -4,6 +4,8 @@
 package co.cleanweb.italy.poolmeup.rest;
 
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,7 +16,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.ObjectifyFactory;
+
 import co.cleanweb.italy.poolmeup.model.Offer;
+import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
 import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
@@ -29,9 +35,11 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 @Consumes({ MediaType.APPLICATION_JSON+"; charset=utf-8" })
 public class OfferResource {
 	PersistenceManager<Offer> managerOffer = null;
-	
+	PersistenceManager<Step> managerStep = null;
+
 	public OfferResource() {
 		managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
+		managerStep=new PersistenceManagerObjectify<Step>(Step.class);
 	}
 	/**
 	 * 
@@ -59,8 +67,23 @@ public class OfferResource {
 	@POST
 	public Response createNewOffer(OfferRequest offerRequested) {
 		Offer persistedOffer = new Offer(offerRequested);
-		//SIMONE - ripristinare
-		//managerOffer.save(Collections.singleton(persistedOffer));
+		//Persist on DB
+		ObjectifyFactory ofy=new ObjectifyFactory();
+//		long key_offer= ofy.allocateId(Offer.class);
+//		persistedOffer.setKey(key_offer);
+		managerOffer.save(Collections.singleton(persistedOffer));
+
+		List<Step> list_step=persistedOffer.getPathRequest();
+		
+		Iterator<Step> it_step=list_step.iterator();
+		while(it_step.hasNext()) {
+			Step tmp_step = it_step.next();
+			Key<Offer> owner = new Key<Offer>(Offer.class, persistedOffer.getKey());
+			tmp_step.setOwner(owner);
+		}
+		managerStep.save(list_step);
+		
+		//Create the response
 		OfferResponse offerResponse = new OfferResponse(offerRequested);
 		return Response.status(Response.Status.CREATED).entity(offerResponse).build();
 	}
@@ -88,4 +111,7 @@ public class OfferResource {
 		// faccio push notification al guidatore
 		return Response.status(Response.Status.OK).entity("{\"response\":\"request pushed\"}").build();
 	}
+
+
+
 }

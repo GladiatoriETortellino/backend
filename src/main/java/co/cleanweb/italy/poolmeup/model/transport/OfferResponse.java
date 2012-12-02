@@ -22,24 +22,15 @@ public class OfferResponse {
 	private String phoneNumber;
 	private String pathLink;
 	
+	//Da non pubblicare
+	private RoutingRequest routingRequest;
+
 	//CONSTRUCORS
 	public OfferResponse(){}
-	
-	public OfferResponse(String id, String phoneNumber, String pathLink) {
-		super();
-		this.idDatabase = id;
-		this.phoneNumber = phoneNumber;
-		this.pathLink = pathLink;
-	}
 
-	
-	public OfferResponse(Offer persistedOffer,OfferRequest request) {
-//		request=persistedOffer.getRequest();
-	}
 	
 	public OfferResponse(OfferRequest request) {
-
-		RoutingRequest routingRequest=new RoutingRequest(request.getVehicleType(), request.getRequestTime(), request.getPathRequest());
+		routingRequest=new RoutingRequest(request.getVehicleType(), request.getRequestTime(), request.getPathRequest());
 		pathLink=routingRequest.toString();
 	}
 
@@ -55,4 +46,14 @@ public class OfferResponse {
 	public String getPathLink() {
 		return pathLink;
 	}
+	
+	public RoutingRequest getRoutingRequest() {
+		return routingRequest;
+	}
+
+
+	public void setRoutingRequest(RoutingRequest routingRequest) {
+		this.routingRequest = routingRequest;
+	}
+
 }

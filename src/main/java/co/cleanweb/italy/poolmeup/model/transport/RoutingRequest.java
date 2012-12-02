@@ -3,6 +3,8 @@
  */
 package co.cleanweb.italy.poolmeup.model.transport;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +18,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import co.cleanweb.italy.poolmeup.model.Step;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -26,13 +38,20 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  */
 public class RoutingRequest {
 	
-	private static final String routingServiceUrl="http://hackathon.opendata.sistemaits.com/dsps/?"; 
+	private static final String routingServiceUrl="http://hackathon.opendata.sistemaits.com/dsps/"; 
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	private Vehicle_Type vehicle_Type;
 	private Calendar tdat;
 	private List<Step> stops_findPath;
-
+	private String endpoint;
+	private String parameters;
+	private String response;//the response xml
+	
+	//Main informations
+	private RouteStop[] routeStops;
+	private double CO2[];
+	
 	
 	//CONSTRUCTORS
 	/**
@@ -41,7 +60,7 @@ public class RoutingRequest {
 	 * @param mode
 	 * @param process
 	 */
-	public RoutingRequest(Vehicle_Type vehicle_Type,Date tdat,List<Step> steps) {
+	 public RoutingRequest(Vehicle_Type vehicle_Type,Date tdat,List<Step> steps) {
 		super();
 		this.vehicle_Type=vehicle_Type;
 		if(tdat==null) {
@@ -51,12 +70,24 @@ public class RoutingRequest {
 			this.tdat.setTime(tdat);
 		}
 		
-		 
+		String date="" + this.tdat.get(Calendar.YEAR) + "-" + (this.tdat.get(Calendar.MONTH)+1) + "-" + this.tdat.get(Calendar.DAY_OF_MONTH) + "+" +
+				  (this.tdat.get(Calendar.HOUR_OF_DAY)<10?0+""+this.tdat.get(Calendar.HOUR_OF_DAY):this.tdat.get(Calendar.HOUR_OF_DAY)) + "%3A" + 
+				  (this.tdat.get(Calendar.MINUTE)<10?0+""+this.tdat.get(Calendar.MINUTE):this.tdat.get(Calendar.MINUTE)) + "%3A00";
+
+		
+		StringBuilder sb=new StringBuilder("treq=findPath&mode="+vehicle_Type.toString()+"&tdat="+date+"&lang=ENG&");
 		stops_findPath=steps;
+		Step[] stops=getStopsOfFindPathRequest();
+		for(int i=0;i<stops.length;i++)
+			sb.append("pxco"+(i+1)+"="+stops[i].getLatitude()+"&pyco"+(i+1)+"="+stops[i].getLongitude()+"&");
+		sb.delete(sb.length()-1, sb.length());
+			
+		parameters= sb.toString();
+		endpoint=routingServiceUrl;
+		response=null;
 	}
 	
-	
-	
+		
 	//METHODS
 	
 	/**
@@ -94,19 +125,7 @@ public class RoutingRequest {
 
 	@Override
 	public String toString() {
-				
-		String date="" + tdat.get(Calendar.YEAR) + "-" + (tdat.get(Calendar.MONTH)+1) + "-" + tdat.get(Calendar.DAY_OF_MONTH) + "+" +
-				  (tdat.get(Calendar.HOUR_OF_DAY)<10?0+""+tdat.get(Calendar.HOUR_OF_DAY):tdat.get(Calendar.HOUR_OF_DAY)) + "%3A" + 
-				  (tdat.get(Calendar.MINUTE)<10?0+""+tdat.get(Calendar.MINUTE):tdat.get(Calendar.MINUTE)) + "%3A00";
-
-		
-		StringBuilder sb=new StringBuilder(routingServiceUrl+"treq=findPath&mode="+vehicle_Type.toString()+"&tdat="+date+"&lang=ENG&");
-		Step[] stops=getStopsOfFindPathRequest();
-		for(int i=0;i<stops.length;i++)
-			sb.append("pxco"+(i+1)+"="+stops[i].getLatitude()+"&pyco"+(i+1)+"="+stops[i].getLongitude()+"&");
-		sb.delete(sb.length()-1, sb.length());
-			
-		return sb.toString();
+		return endpoint+parameters;
 	}
 
 
@@ -122,6 +141,106 @@ public class RoutingRequest {
 	};
 
 
+	/**
+	 * Send the get request to the server and return the response as a string
+	 * @return
+	 */
+	public String sendRequest() {
+		try {
+			return HTTPRequest.sendGetRequestGetString(endpoint, parameters);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 
+	/**
+	 * Send the get request to the server and store the response
+	 * @return False if the request return an errorm or is empty (withot path)
+	 */
+	public boolean incapsulateResponse() {
+		response=sendRequest();
+		//parse the xml response
+		DocumentBuilder db;
+		Document doc = null;
+	    InputSource is = new InputSource();
+
+		try {
+			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			doc = db.parse(is);
+
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    is.setCharacterStream(new StringReader(response));
+		Element resp = (Element) doc.getElementsByTagName("response").item(0);
+		
+		
+		if(resp.getAttribute("stat").equals("error")) {
+//			errorMessage = ((Element) resp.getFirstChild()).getAttribute("errm");
+//			errorType = ((Element) resp.getFirstChild()).getAttribute("errt");
+//			responseStatus=" -  ERROR: " + errorMessage;
+			return false;
+		}else {
+			
+			//get a nodelist of elements
+			routeStops=new RouteStop[stops_findPath.size()];
+			Element origin=(Element) resp.getElementsByTagName("orig");
+			Calendar tmp_cal=Calendar.getInstance();
+			try {
+				tmp_cal.setTime(sdf.parse( origin.getAttribute("inst").replace('T', ' ')));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			routeStops[0]=new RouteStop(Double.parseDouble( origin.getAttribute("xcoo")),
+					Double.parseDouble( origin.getAttribute("ycoo")),tmp_cal);
+			
+			List<Calendar> list_inst=new ArrayList<Calendar>(100);
+			List<Double> list_CO2=new ArrayList<Double>(100);
+			NodeList nl_path = resp.getElementsByTagName("path");
+			if(nl_path != null && nl_path.getLength() > 0) {
+				for(int i = 0 ; i < nl_path.getLength();i++) {
+
+					NodeList nl_link = resp.getChildNodes();
+					for(int j = 0 ; j < nl_path.getLength();j++) {
+						
+						//get the employee element
+						Element el = (Element)nl_path.item(i);
+						if(el.getNodeName().equals("link")) {
+							try {
+								tmp_cal.setTime(sdf.parse( origin.getAttribute("inst").replace('T', ' ')));
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							list_inst.add(tmp_cal);
+							list_CO2.add(Double.parseDouble(el.getAttribute("CO2")));
+						}else {
+							if (el.getAttribute("divr").equals("")){
+								
+							}
+						}
+						
+
+					}
+
+				}
+			}
+			else return false;
+			
+		}
+		return false;
+
+	}
 	
 }
+

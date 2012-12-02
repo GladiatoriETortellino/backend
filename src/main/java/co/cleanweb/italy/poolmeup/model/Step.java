@@ -9,9 +9,7 @@ public class Step extends AbstractObjectPersist{
 	private Double latitude = null;
 	private Double longitude = null;
 	private boolean isFromPickToDrop = true;
-	
-	@Parent 
-	Key<Offer> offer;
+	 
 	
 	public Step() {}
 	
@@ -71,4 +69,24 @@ public class Step extends AbstractObjectPersist{
 	public Double getDelay(Step step){
 		return null; //TODO: get Step Delay
 	}
+
+
+//	public Key<Offer> getOwner() {
+//		return owner;
+//	}
+//
+//	public void setOwner(Key<Offer> owner) {
+//		this.owner = owner;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if(obj==null || !obj.getClass().equals(getClass())) return false;
+//		Step step=(Step) obj;
+//		return latitude==step.getLatitude() && longitude==step.getLongitude() && isFromPickToDrop==step.isFromPickToDrop()
+//				&& owner.equals(step.getOwner());
+//		
+//	};
+
+
 }

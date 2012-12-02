@@ -8,7 +8,9 @@ import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Parent;
 
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
 
@@ -23,6 +25,9 @@ public abstract class AbstractObjectPersist implements ObjectPersistable {
 	private Date creationDate = null;
 	private Date updatedDate = null;
 	
+	@Parent private Key<?> owner;
+	
+
 	public AbstractObjectPersist() {}
 
 	/**
@@ -97,7 +102,13 @@ public abstract class AbstractObjectPersist implements ObjectPersistable {
 		}
 	}
 
-	
+	public Key<?> getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Key<?> owner) {
+		this.owner = owner;
+	}
 	
 	
 }

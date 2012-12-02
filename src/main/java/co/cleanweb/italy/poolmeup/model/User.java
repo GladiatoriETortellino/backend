@@ -17,8 +17,8 @@ public class User extends AbstractObjectPersist {
 	private String phoneNumber = null;
 	private String userName = null;
 	
-	@Parent 
-	Key<Ride> ride;
+//	@Parent 
+//	Key<Ride> ride;
 
 	
 	public User(String phoneNumber, String userName) {

@@ -15,14 +15,14 @@ import co.cleanweb.italy.poolmeup.model.Step;
  */
 public class OfferRequest {
 	
-	private String phoneNumber = null;
-	private String userName = null;
+	private String phoneNumber = "";
+	private String userName = "";
 	
-	private Vehicle_Type vehicleType = null;
+	private Vehicle_Type vehicleType = Vehicle_Type.AUTO;
 	private Integer numberPlaces = 0;
-	private Date requestTime = null;
-	private Boolean isStartingTime;
-	private Integer maxThreshold;
+	private Date requestTime = new Date();
+	private Boolean isStartingTime = false;
+	private Integer maxThreshold = new Integer(8);
 	
 	private List<Step> pathRequest = null;
 	
@@ -44,7 +44,7 @@ public class OfferRequest {
 		super();
 		this.phoneNumber = phoneNumber;
 		this.userName = userName;
-		this.vehicleType = vehicleType;
+		this.vehicleType = Vehicle_Type.AUTO;
 		this.numberPlaces = numberPlaces;
 		this.requestTime = requestTime;
 		this.isStartingTime = isStartingTime;
@@ -90,9 +90,9 @@ public class OfferRequest {
 	/**
 	 * @param vehicleType the vehicleType to set
 	 */
-	public void setVehicleType(Vehicle_Type vehicleType) {
-		this.vehicleType = vehicleType;
-	}
+//	public void setVehicleType(Vehicle_Type vehicleType) {
+//		this.vehicleType = vehicleType;
+//	}
 
 	/**
 	 * @return the numberPlaces
