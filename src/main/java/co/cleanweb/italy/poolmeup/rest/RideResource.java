@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
 import co.cleanweb.italy.poolmeup.model.transport.RideResponse;
+import co.cleanweb.italy.poolmeup.persistence.datastore.FakeDB;
 import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
@@ -47,7 +48,10 @@ public class RideResource {
 	@POST
 	public Response createNewRide(RideRequest rideRequested) {
 		Ride persistedRide = new Ride(rideRequested);
-		managerRide.save(Collections.singleton(persistedRide));
+		
+		persistedRide.setKey(Long.valueOf(FakeDB.countRide));
+		FakeDB.rideDB.put(Long.valueOf(FakeDB.countRide), persistedRide);
+		FakeDB.countRide++;
 		
 		RideResponse rideResponse = new RideResponse(persistedRide);
 		return Response.status(Response.Status.CREATED).entity(rideResponse).build();

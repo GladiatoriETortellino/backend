@@ -27,7 +27,6 @@ public class Ride extends AbstractObjectPersist {
 	protected List<User> friends = null;
 	
 	public Ride(RideRequest rr){
-		
 		this.userID = rr.getUserID();
 		this.userName = rr.getUserName();
 		this.requestTime = rr.getRequestTime();

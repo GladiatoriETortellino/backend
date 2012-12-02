@@ -11,11 +11,14 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyFactory;
 
@@ -23,6 +26,7 @@ import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
+import co.cleanweb.italy.poolmeup.persistence.datastore.FakeDB;
 import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
@@ -55,8 +59,8 @@ public class OfferResource {
 	 */
 	@GET
 	@Path("/{offerId}")
-	public Response getSpecificPath() {
-		return Response.status(Response.Status.OK).entity("{\"response\":\"getOffers method\"}").build();
+	public Response getSpecificPath(@PathParam("offerId") Long offerId) {
+		return Response.status(Response.Status.OK).entity(FakeDB.offerDB.get(offerId)).build();
 	}
 	/**
 	 * create a new offer
@@ -74,15 +78,10 @@ public class OfferResource {
 //			step.setOffer(persistedOffer);
 //		}
 		// persisto l'offerta
-		managerOffer.save(Collections.singleton(persistedOffer));
-//		Iterator<Step> it_step=list_step.iterator();
-//		while(it_step.hasNext()) {
-//			Step tmp_step = it_step.next();
-//			Key<Offer> owner = new Key<Offer>(Offer.class, persistedOffer.getKey());
-//			tmp_step.setOwner(owner);
-//		}
-		// persisto la lista di step
-		managerStep.save(list_step);
+		
+		persistedOffer.setKey(Long.valueOf(FakeDB.countOffer));
+		FakeDB.offerDB.put(Long.valueOf(FakeDB.countOffer), persistedOffer);
+		FakeDB.countOffer++;
 		
 //		//Create the response
 		OfferResponse offerResponse = new OfferResponse(persistedOffer.getKey().toString(),offerRequested);
@@ -96,8 +95,8 @@ public class OfferResource {
 	@POST
 	@Path("/{offerId}")
 	public Response updateOffer(OfferRequest offerRequested) {
-		
 //		Offer persistedOffer = new Offer(offerRequested);
+		
 //		managerOffer.update(Collections.singleton(persistedOffer));
 //		OfferResponse offerResponse = new OfferResponse(offerRequested);
 		return Response.status(Response.Status.OK).entity(null).build();
