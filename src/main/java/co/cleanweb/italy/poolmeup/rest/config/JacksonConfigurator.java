@@ -36,15 +36,16 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
     	log.fine("initialize mapper");
     	mapper = new ObjectMapper();
     	SerializationConfig serConfig = mapper.getSerializationConfig();
-        serConfig.withDateFormat(new SimpleDateFormat(dateFormat));
+        serConfig.setDateFormat(new SimpleDateFormat(dateFormat));
         serConfig.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
         DeserializationConfig deserializationConfig = mapper.getDeserializationConfig();
-        deserializationConfig.withDateFormat(new SimpleDateFormat(dateFormat));
+        deserializationConfig.setDateFormat(new SimpleDateFormat(dateFormat));
 //        mapper.configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES,false);
         mapper.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);
         mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.configure(SerializationConfig.Feature.USE_ANNOTATIONS, false);
-        mapper.configure(DeserializationConfig.Feature.USE_ANNOTATIONS, false);
+//        mapper.configure(SerializationConfig.Feature.USE_ANNOTATIONS, false);
+//        mapper.configure(DeserializationConfig.Feature.USE_ANNOTATIONS, false);
     }
 
     /** {@inheritDoc} */

@@ -1,4 +1,4 @@
-package co.cleanweb.italy.poolmeup.model.transport;
+package co.cleanweb.italy.poolmeup.utils;
 
 /**
  * HTTPRequest.java

@@ -29,6 +29,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import co.cleanweb.italy.poolmeup.model.Step;
+import co.cleanweb.italy.poolmeup.utils.HTTPRequest;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
