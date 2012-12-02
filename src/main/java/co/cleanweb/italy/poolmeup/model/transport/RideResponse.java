@@ -27,6 +27,50 @@ public class RideResponse {
 	
 	public RideResponse() {}
 	
-	public RideResponse(Ride ride) {}
+	public RideResponse(Ride ride, RideRequest rideRequest) {
+		this.userName = rideRequest.getUserName();
+	}
+
+	/**
+	 * @return the userID
+	 */
+	public String getUserID() {
+		return userID;
+	}
+
+	/**
+	 * @param userID the userID to set
+	 */
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * @return the offers
+	 */
+	public List<TripForARide> getOffers() {
+		return offers;
+	}
+
+	/**
+	 * @param offers the offers to set
+	 */
+	public void setOffers(List<TripForARide> offers) {
+		this.offers = offers;
+	}
 }
 

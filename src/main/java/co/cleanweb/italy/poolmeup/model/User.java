@@ -50,4 +50,16 @@ public class User extends AbstractObjectPersist {
 		return tripOfUser;
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof User) {
+			User passedUser = (User) obj;
+			return passedUser.getPhoneNumber().equals(this.phoneNumber);
+		}
+		else return false;
+	}
 }
