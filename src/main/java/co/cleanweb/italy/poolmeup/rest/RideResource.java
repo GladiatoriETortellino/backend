@@ -21,7 +21,6 @@ import co.cleanweb.italy.poolmeup.model.Ride;
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
 import co.cleanweb.italy.poolmeup.model.transport.RideResponse;
 import co.cleanweb.italy.poolmeup.persistence.datastore.FakeDB;
-import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
 /**
@@ -35,7 +34,7 @@ public class RideResource {
 	PersistenceManager<Ride> managerRide = null;
 	
 	public RideResource() {
-		managerRide = new PersistenceManagerObjectify<Ride>(Ride.class);
+//		managerRide = new PersistenceManagerObjectify<Ride>(Ride.class);
 	}
 	/**
 	 * 

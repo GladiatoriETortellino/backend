@@ -6,6 +6,7 @@ package co.cleanweb.italy.poolmeup.rest;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -27,7 +28,6 @@ import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.transport.OfferRequest;
 import co.cleanweb.italy.poolmeup.model.transport.OfferResponse;
 import co.cleanweb.italy.poolmeup.persistence.datastore.FakeDB;
-import co.cleanweb.italy.poolmeup.persistence.datastore.PersistenceManagerObjectify;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
 /**
@@ -40,10 +40,12 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 public class OfferResource {
 	PersistenceManager<Offer> managerOffer = null;
 	PersistenceManager<Step> managerStep = null;
+	private static final Logger log = Logger.getLogger(OfferResource.class
+			.getName());
 
 	public OfferResource() {
-		managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
-		managerStep=new PersistenceManagerObjectify<Step>(Step.class);
+//		managerOffer = new PersistenceManagerObjectify<Offer>(Offer.class);
+//		managerStep=new PersistenceManagerObjectify<Step>(Step.class);
 	}
 	/**
 	 * 
@@ -62,6 +64,12 @@ public class OfferResource {
 	public Response getSpecificPath(@PathParam("offerId") Long offerId) {
 		return Response.status(Response.Status.OK).entity(FakeDB.offerDB.get(offerId)).build();
 	}
+	@POST
+	@Path("/steps")
+	public Response testStep(Step step) {
+		log.info(step.getLat()+" "+step.getLng()+" "+step.getName());
+		return Response.status(Response.Status.CREATED).entity("{\"response\":\"testStep method\"}").build();
+	}
 	/**
 	 * create a new offer
 	 * 
@@ -72,6 +80,11 @@ public class OfferResource {
 	public Response createNewOffer(OfferRequest offerRequested) {
 		// persist the offer on DB
 		Offer persistedOffer = new Offer(offerRequested);
+		
+		for (Step localStep : offerRequested.getPathRequest() ) {
+			log.info(localStep.getLat()+" "+localStep.getLng());
+			
+		}
 		// ottengo la lista di path richiesti dall'utente
 		List<Step> list_step=offerRequested.getPathRequest();
 //		for (Step step : list_step) {
