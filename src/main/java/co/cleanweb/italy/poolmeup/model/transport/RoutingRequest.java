@@ -3,6 +3,7 @@
  */
 package co.cleanweb.italy.poolmeup.model.transport;
 
+import java.net.HttpURLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -121,7 +122,13 @@ public class RoutingRequest {
 		this.vehicle_Type = vehicle_Type;
 	};
 
-
+	public String sendPathRequest(Vehicle_Type vehicle_Type,Date tdat,List<Step> steps){
+		
+		RoutingRequest rr = new RoutingRequest(vehicle_Type,tdat,steps);
+		String httpReq = rr.toString();
+		return null; //TODO: send http!
+		
+	}
 
 	
 }

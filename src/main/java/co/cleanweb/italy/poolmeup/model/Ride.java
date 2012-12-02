@@ -1,9 +1,13 @@
 package co.cleanweb.italy.poolmeup.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.persistence.Transient;
 
@@ -37,6 +41,8 @@ public class Ride extends AbstractObjectPersist {
 
 	public List<TripForARide> getCompatibleTrips(){
 		
+		TreeMap tm = new TreeMap();
+		
 		List<TripForARide> compatibleTrips = new ArrayList<TripForARide>();
 		Iterator<User> it = this.friends.iterator();
 		while (it.hasNext()){ 
@@ -45,10 +51,15 @@ public class Ride extends AbstractObjectPersist {
 			if (currentTrip != null){ //TODO: and vehicleType is compatible with asker's preferences
 				Double delay = currentTrip.getDelay(this); //if any, get delay (inf = out of delay)
 				if (delay < inf){
-					compatibleTrips.add(new TripForARide(currentFriend.getUserName(), currentFriend.getPhoneNumber(), currentTrip.getVehicleType())); //if compatible, add to the list
+					tm.put(delay, new TripForARide(currentFriend.getUserName(), currentFriend.getPhoneNumber(), currentTrip.getVehicleType(), delay));
+					//compatibleTrips.add(new TripForARide(currentFriend.getUserName(), currentFriend.getPhoneNumber(), currentTrip.getVehicleType(), delay)); //if compatible, add to the list
 				}
 			}
 		}
+		
+		Set set = tm.entrySet();
+		compatibleTrips.addAll(set);
+		
 		return compatibleTrips;
 	}
 
