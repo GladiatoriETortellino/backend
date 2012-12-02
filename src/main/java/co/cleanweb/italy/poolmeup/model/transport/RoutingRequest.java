@@ -50,7 +50,8 @@ public class RoutingRequest {
 	
 	//Main informations
 	private RouteStop[] routeStops;
-	private double CO2[];
+	private Calendar inst[];
+	private Double CO2[];
 	
 	
 	//CONSTRUCTORS
@@ -141,6 +142,48 @@ public class RoutingRequest {
 	};
 
 
+	
+	
+	public Calendar getTdat() {
+		return tdat;
+	}
+
+
+	public List<Step> getStops_findPath() {
+		return stops_findPath;
+	}
+
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+
+	public String getParameters() {
+		return parameters;
+	}
+
+
+	public String getResponse() {
+		return response;
+	}
+
+
+	public RouteStop[] getRouteStops() {
+		return routeStops;
+	}
+
+
+	public Calendar[] getInst() {
+		return inst;
+	}
+
+
+	public Double[] getCO2() {
+		return CO2;
+	}
+
+
 	/**
 	 * Send the get request to the server and return the response as a string
 	 * @return
@@ -168,19 +211,22 @@ public class RoutingRequest {
 
 		try {
 			db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		    is.setCharacterStream(new StringReader(response));
 			doc = db.parse(is);
 
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-	    is.setCharacterStream(new StringReader(response));
 		Element resp = (Element) doc.getElementsByTagName("response").item(0);
 		
 		
@@ -193,13 +239,14 @@ public class RoutingRequest {
 			
 			//get a nodelist of elements
 			routeStops=new RouteStop[stops_findPath.size()];
-			Element origin=(Element) resp.getElementsByTagName("orig");
+			Element origin=(Element) resp.getElementsByTagName("orig").item(0);
 			Calendar tmp_cal=Calendar.getInstance();
 			try {
 				tmp_cal.setTime(sdf.parse( origin.getAttribute("inst").replace('T', ' ')));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
 			routeStops[0]=new RouteStop(Double.parseDouble( origin.getAttribute("xcoo")),
 					Double.parseDouble( origin.getAttribute("ycoo")),tmp_cal);
@@ -207,33 +254,48 @@ public class RoutingRequest {
 			List<Calendar> list_inst=new ArrayList<Calendar>(100);
 			List<Double> list_CO2=new ArrayList<Double>(100);
 			NodeList nl_path = resp.getElementsByTagName("path");
+			int nStop=0;
 			if(nl_path != null && nl_path.getLength() > 0) {
+				nStop++;
 				for(int i = 0 ; i < nl_path.getLength();i++) {
 
-					NodeList nl_link = resp.getChildNodes();
-					for(int j = 0 ; j < nl_path.getLength();j++) {
+					NodeList nl_link = nl_path.item(i).getChildNodes();
+					for(int j = 0 ; j < nl_link.getLength();j++) {
 						
 						//get the employee element
-						Element el = (Element)nl_path.item(i);
+						Element el = (Element)nl_link.item(j);
 						if(el.getNodeName().equals("link")) {
 							try {
-								tmp_cal.setTime(sdf.parse( origin.getAttribute("inst").replace('T', ' ')));
+								//System.out.println( sdf.format(tmp_cal.getTime()));
+								tmp_cal=Calendar.getInstance();
+								tmp_cal.setTime(sdf.parse( el.getAttribute("inst").replace('T', ' ')));
 							} catch (ParseException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
+								return false;
 							}
 							list_inst.add(tmp_cal);
 							list_CO2.add(Double.parseDouble(el.getAttribute("CO2")));
 						}else {
-							if (el.getAttribute("divr").equals("")){
-								
+							try {
+								tmp_cal=Calendar.getInstance();
+								tmp_cal.setTime(sdf.parse( el.getAttribute("inst").replace('T', ' ')));
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
+							routeStops[nStop]=new RouteStop(Double.parseDouble( origin.getAttribute("xcoo")),
+									Double.parseDouble( el.getAttribute("ycoo")),tmp_cal);
 						}
 						
-
 					}
 
 				}
+				inst=new Calendar[list_inst.size()];
+				list_inst.toArray(inst);
+				CO2=new Double[list_CO2.size()];
+				list_CO2.toArray(CO2);
+				
 			}
 			else return false;
 			
