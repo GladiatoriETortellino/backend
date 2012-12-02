@@ -6,8 +6,9 @@ import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass
 public class Step extends AbstractObjectPersist{
-	private Double latitude = null;
-	private Double longitude = null;
+	private Double lat = null;
+	private Double lng = null;
+	private String name="";
 	private boolean isFromPickToDrop = true;
 	
 	@Parent
@@ -21,36 +22,36 @@ public class Step extends AbstractObjectPersist{
 	 */
 	public Step(Double latitude, Double longitude) {
 		super();
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.lat = latitude;
+		this.lng = longitude;
 	}
 
 	/**
 	 * @return the latitude
 	 */
 	public Double getLatitude() {
-		return latitude;
+		return lat;
 	}
 
 	/**
 	 * @param latitude the latitude to set
 	 */
 	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+		this.lat = latitude;
 	}
 
 	/**
 	 * @return the longitude
 	 */
 	public Double getLongitude() {
-		return longitude;
+		return lng;
 	}
 
 	/**
 	 * @param longitude the longitude to set
 	 */
 	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+		this.lng = longitude;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
