@@ -18,8 +18,11 @@ import javax.ws.rs.core.Response;
 
 import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Ride;
+import co.cleanweb.italy.poolmeup.model.TripForARide;
+import co.cleanweb.italy.poolmeup.model.User;
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
 import co.cleanweb.italy.poolmeup.model.transport.RideResponse;
+import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 import co.cleanweb.italy.poolmeup.persistence.datastore.FakeDB;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 
@@ -51,21 +54,25 @@ public class RideResource {
 	@POST
 	public Response createNewRide(RideRequest rideRequested) {
 		Ride persistedRide = new Ride(rideRequested);
+		List<User> usersRequest = rideRequested.getFriends();
+		List<String> friendsPhoneNumbers = new ArrayList<String>();
 		
-		
-		Collection<Offer> listOffers = FakeDB.offerDB.values();
-		List<Offer> pheasibleOffer = new ArrayList<Offer>();
-		for (Offer offer : listOffers) {
-//			if(offer.getPhoneNumber().eq
+		for (User user : usersRequest) {
+			friendsPhoneNumbers.add(user.getPhoneNumber());
 		}
 		
+		Collection<Offer> listOffers = FakeDB.offerDB.values();
 		
-//		persistedRide.setKey(Long.valueOf(FakeDB.countRide));
-//		FakeDB.rideDB.put(Long.valueOf(FakeDB.countRide), persistedRide);
-//		FakeDB.countRide++;
+		List<TripForARide> listTFA = new ArrayList<TripForARide>();
+		for (Offer offer : listOffers) {
+			if(friendsPhoneNumbers.contains(offer.getPhoneNumber())) {
+				listTFA.add(new TripForARide(offer.getUserName(),offer.getPhoneNumber(),offer.getVehicleType(),Double.valueOf(12L)));
+			}
+		}
 		
 		RideResponse rideResponse = new RideResponse(persistedRide, rideRequested);
 		rideResponse.setUserID("12345");
+		rideResponse.setOffers(listTFA);
 		return Response.status(Response.Status.CREATED).entity(rideResponse).build();
 	}
 }

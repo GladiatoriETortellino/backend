@@ -60,6 +60,8 @@ public class User extends AbstractObjectPersist {
 			User passedUser = (User) obj;
 			return passedUser.getPhoneNumber().equals(this.phoneNumber);
 		}
-		else return false;
+		else {
+			return false;
+		}
 	}
 }

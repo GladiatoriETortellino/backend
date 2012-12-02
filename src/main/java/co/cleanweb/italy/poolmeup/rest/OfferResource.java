@@ -64,12 +64,6 @@ public class OfferResource {
 	public Response getSpecificPath(@PathParam("offerId") Long offerId) {
 		return Response.status(Response.Status.OK).entity(FakeDB.offerDB.get(offerId)).build();
 	}
-	@POST
-	@Path("/steps")
-	public Response testStep(Step step) {
-		log.info(step.getLat()+" "+step.getLng()+" "+step.getName());
-		return Response.status(Response.Status.CREATED).entity("{\"response\":\"testStep method\"}").build();
-	}
 	/**
 	 * create a new offer
 	 * 
@@ -81,10 +75,6 @@ public class OfferResource {
 		// persist the offer on DB
 		Offer persistedOffer = new Offer(offerRequested);
 		
-		for (Step localStep : offerRequested.getPathRequest() ) {
-			log.info(localStep.getLat()+" "+localStep.getLng());
-			
-		}
 		// ottengo la lista di path richiesti dall'utente
 		List<Step> list_step=offerRequested.getPathRequest();
 //		for (Step step : list_step) {
