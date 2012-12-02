@@ -136,7 +136,7 @@ public class RoutingRequest {
 
 	@Override
 	public String toString() {
-		return endpoint+parameters;
+		return endpoint+"?"+parameters;
 	}
 
 
