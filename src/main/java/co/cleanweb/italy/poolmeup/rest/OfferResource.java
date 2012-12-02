@@ -77,6 +77,7 @@ public class OfferResource {
 			String pathLink=routingRequest.toString();
 			returnOffer.setPathLink(pathLink);
 		}
+		FakeDB.offerDB.remove(offerId);
 		return Response.status(Response.Status.OK).entity(returnOffer).build();
 	}
 	/**
@@ -139,7 +140,7 @@ public class OfferResource {
 				newList.add(listRequestedSteps.get(1));
 				newList.add(listSteps.get(listSteps.size()-1));
 				
-				FakeDB.offerDB.remove(selectedOffer.getKey());
+//				FakeDB.offerDB.remove(selectedOffer.getKey());
 				offer.setPathRequest(newList);
 			}
 		}
