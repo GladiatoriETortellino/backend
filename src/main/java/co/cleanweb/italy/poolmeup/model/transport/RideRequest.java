@@ -14,7 +14,7 @@ public class RideRequest {
 	protected String userName = null;
 	protected Calendar requestTime = null;  
 	protected Integer numberOfPerson = null; 
-	protected Step origin_destination = null;
+	protected List<Step> odSteps = null;
 	protected List<User> friends = null;
 	
 	public Long getUserID() {
@@ -41,11 +41,11 @@ public class RideRequest {
 	public void setNumberOfPerson(Integer numberOfPerson) {
 		this.numberOfPerson = numberOfPerson;
 	}
-	public Step getOrigin_destination() {
-		return origin_destination;
+	public List<Step> getODSteps() {
+		return odSteps;
 	}
-	public void setOrigin_destination(Step origin_destination) {
-		this.origin_destination = origin_destination;
+	public void setODSteps(List<Step> odSteps) {
+		this.odSteps = odSteps;
 	}
 	public List<User> getFriends() {
 		return friends;

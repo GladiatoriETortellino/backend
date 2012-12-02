@@ -19,7 +19,7 @@ public class Ride extends AbstractObjectPersist {
 	protected String userName = null;
 	protected Calendar requestTime = null;  
 	protected Integer numberOfPerson = null; 
-	protected Step origin_destination = null;
+	@Transient protected List<Step> odSteps = null;
 	@Transient protected List<User> friends = null;
 	
 	public Ride(RideRequest rr){
@@ -28,7 +28,7 @@ public class Ride extends AbstractObjectPersist {
 		this.userName = rr.getUserName();
 		this.requestTime = rr.getRequestTime();
 		this.numberOfPerson = rr.getNumberOfPerson(); 
-		this.origin_destination = rr.getOrigin_destination();
+		this.odSteps = rr.getODSteps();
 		this.friends = rr.getFriends();
 		
 	}
@@ -117,12 +117,12 @@ public class Ride extends AbstractObjectPersist {
 		this.numberOfPerson = numberOfPerson;
 	}
 
-	public Step getOrigin_destination() {
-		return origin_destination;
+	public List<Step> getODSteps() {
+		return odSteps;
 	}
 
-	public void setOrigin_destination(Step origin_destination) {
-		this.origin_destination = origin_destination;
+	public void setODSteps(List<Step> odSteps) {
+		this.odSteps = odSteps;
 	}
 
 }

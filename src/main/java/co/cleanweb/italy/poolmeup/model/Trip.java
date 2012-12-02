@@ -4,9 +4,13 @@
 package co.cleanweb.italy.poolmeup.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import com.googlecode.objectify.annotation.Subclass;
+
+import co.cleanweb.italy.poolmeup.model.transport.RoutingRequest;
 import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
 
 /**
@@ -14,13 +18,21 @@ import co.cleanweb.italy.poolmeup.model.transport.Vehicle_Type;
  *
  */
 @Subclass
-public class Trip  extends AbstractObjectPersist {
+public class Trip extends AbstractObjectPersist {
 	
+	private static final Double inf = 99999.0;
 	protected String driverName;
 	protected String driverPhoneNumber;
+	protected Double maxDelay;
 	protected Vehicle_Type vehicleType;
 	protected Integer numberOfPlaces;
+	protected List<Step> stepList;
+	protected Calendar calculatedArrivalTime;
 	
+	public Trip(List<Step> stepList) {
+		this.stepList = stepList;
+	}
+
 	public String getDriverName() {
 		return driverName;
 	}
@@ -54,22 +66,29 @@ public class Trip  extends AbstractObjectPersist {
 	}
 
 	public Double getDelay(Ride ride){
-		List<Step> tripSteps = this.getSteps();
-		int freePlaces = this.numberOfPlaces;
-		Iterator<Step> it = tripSteps.iterator();
-		while (it.hasNext()){
-			Step currentStep = it.next();
-			if (currentStep.isFromPickToDrop()){
-				freePlaces--;
-				}
-			else{
-				freePlaces++;
-			} 
-			if (freePlaces >= ride.numberOfPerson){
-				currentStep.getDelay(ride.origin_destination);
-			}
-		}		
-		return null; //TODO: insert delay calculation
+		
+		//costruisco il nuovo percorso
+		List<Step> newSteps = new ArrayList<Step>();
+		newSteps.add(this.stepList.get(0));
+		newSteps.add(ride.getODSteps().get(0));
+		newSteps.add(ride.getODSteps().get(1));
+		newSteps.add(this.stepList.get(1));
+		//costruisco la route request
+		RoutingRequest rr = new RoutingRequest(this.vehicleType, new Date(), newSteps);
+		rr.toString();
+		
+		//la mando
+		
+		Calendar newArrivalTime = null; //prendo il tempo di arrivo
+		long sec1 = newArrivalTime.getTimeInMillis() / 1000;
+		long sec2 = this.calculatedArrivalTime.getTimeInMillis() / 1000;
+		if (sec1 - sec2 > this.maxDelay){
+			return inf;
+		}
+		else{
+			return (double) (sec1 - sec2);
+		}
+				
 	}
 	
 	public List<Step> getSteps(){
@@ -77,5 +96,4 @@ public class Trip  extends AbstractObjectPersist {
 		return null;
 	}
 
-	public Trip() {}
 }
