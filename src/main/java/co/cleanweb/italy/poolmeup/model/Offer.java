@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.googlecode.objectify.annotation.Subclass;
 

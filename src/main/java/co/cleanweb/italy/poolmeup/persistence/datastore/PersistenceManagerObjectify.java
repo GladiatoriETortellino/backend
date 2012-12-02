@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import co.cleanweb.italy.poolmeup.model.AbstractObjectPersist;
 import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Ride;
+import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.Trip;
 import co.cleanweb.italy.poolmeup.model.User;
 import co.cleanweb.italy.poolmeup.persistence.interfaces.ObjectPersistable;
@@ -40,6 +41,7 @@ public class PersistenceManagerObjectify<T extends ObjectPersistable> implements
 		ObjectifyService.register(Ride.class);
 		ObjectifyService.register(Trip.class);
 		ObjectifyService.register(User.class);
+		ObjectifyService.register(Step.class);
 		localDao = new DAOBase();
 	}
 	

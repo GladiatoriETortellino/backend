@@ -26,6 +26,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  */
 public class RoutingRequest {
 	
+	private static final String routingServiceUrl="http://hackathon.opendata.sistemaits.com/dsps/?"; 
 	private static final SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	private Vehicle_Type vehicle_Type;
@@ -99,7 +100,7 @@ public class RoutingRequest {
 				  (tdat.get(Calendar.MINUTE)<10?0+""+tdat.get(Calendar.MINUTE):tdat.get(Calendar.MINUTE)) + "%3A00";
 
 		
-		StringBuilder sb=new StringBuilder("treq=findPath&mode="+vehicle_Type.toString()+"&tdat="+date+"&lang=ENG&");
+		StringBuilder sb=new StringBuilder(routingServiceUrl+"treq=findPath&mode="+vehicle_Type.toString()+"&tdat="+date+"&lang=ENG&");
 		Step[] stops=getStopsOfFindPathRequest();
 		for(int i=0;i<stops.length;i++)
 			sb.append("pxco"+(i+1)+"="+stops[i].getLatitude()+"&pyco"+(i+1)+"="+stops[i].getLongitude()+"&");

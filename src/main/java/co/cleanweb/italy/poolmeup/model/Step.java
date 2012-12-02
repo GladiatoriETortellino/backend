@@ -1,9 +1,17 @@
 package co.cleanweb.italy.poolmeup.model;
 
+import com.googlecode.objectify.Key;
+import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Subclass;
+
+@Subclass
 public class Step extends AbstractObjectPersist{
 	private Double latitude = null;
 	private Double longitude = null;
 	private boolean isFromPickToDrop = true;
+	
+	@Parent 
+	Key<Offer> offer;
 	
 	public Step() {}
 	
