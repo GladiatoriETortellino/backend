@@ -3,6 +3,9 @@
  */
 package co.cleanweb.italy.poolmeup.model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.annotation.Subclass;
@@ -11,10 +14,12 @@ import com.googlecode.objectify.annotation.Subclass;
  * @author micheleorsi
  *
  */
-@Subclass
+
+@XmlRootElement
 public class User extends AbstractObjectPersist {
-	
+	@XmlElement
 	private String phoneNumber = null;
+	@XmlElement
 	private String userName = null;
 	
 	

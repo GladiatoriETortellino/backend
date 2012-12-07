@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,6 +19,7 @@ import javax.ws.rs.core.Response;
 
 import co.cleanweb.italy.poolmeup.model.Offer;
 import co.cleanweb.italy.poolmeup.model.Ride;
+import co.cleanweb.italy.poolmeup.model.Step;
 import co.cleanweb.italy.poolmeup.model.TripForARide;
 import co.cleanweb.italy.poolmeup.model.User;
 import co.cleanweb.italy.poolmeup.model.transport.RideRequest;
@@ -35,6 +37,9 @@ import co.cleanweb.italy.poolmeup.persistence.interfaces.PersistenceManager;
 @Consumes({ MediaType.APPLICATION_JSON+"; charset=utf-8" })
 public class RideResource {
 	PersistenceManager<Ride> managerRide = null;
+	
+	private static final Logger log = Logger.getLogger(OfferResource.class
+			.getName());
 	
 	public RideResource() {
 //		managerRide = new PersistenceManagerObjectify<Ride>(Ride.class);
@@ -56,6 +61,12 @@ public class RideResource {
 		Ride persistedRide = new Ride(rideRequested);
 		List<User> usersRequest = rideRequested.getFriends();
 		List<String> friendsPhoneNumbers = new ArrayList<String>();
+		
+		List<Step> listSteps = rideRequested.getODSteps();
+		int i = 0;
+		for (Step step : listSteps) {
+			log.info("step "+i+": "+step.getName());
+		}
 		
 		for (User user : usersRequest) {
 			friendsPhoneNumbers.add(user.getPhoneNumber());
